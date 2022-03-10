@@ -30,7 +30,8 @@
     "phpstan/phpstan": "^1.4",
     "squizlabs/php_codesniffer": "^3.6",
     "phpunit/phpunit": "^9",
-    "vimeo/psalm": "^4.22"
+    "vimeo/psalm": "^4.22",
+    "symfony/phpunit-bridge": "^6.0"
   },
   "config": {
     "allow-plugins": {
