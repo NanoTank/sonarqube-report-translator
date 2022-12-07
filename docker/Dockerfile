@@ -1,10 +1,19 @@
-FROM php:8.1.3-fpm-alpine  AS system
+FROM php:8.1-cli-alpine  AS system
 
 RUN apk add --no-cache \
         gettext \
         libxslt \
-        $PHPIZE_DEPS \
+        $PHPIZE_DEPS
 
 RUN pecl install xdebug
 
+RUN docker-php-ext-enable xdebug
+
+COPY docker/xdebug.ini $PHP_INI_DIR/conf.d/docker-php-ext-xdebug_config.ini
+
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+COPY .. /app
+
+WORKDIR /app
+

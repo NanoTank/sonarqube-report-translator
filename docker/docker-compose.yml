@@ -5,5 +5,11 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
+    environment:
+      APP_ENV: dev
+      XDEBUG_MODE: debug,coverage
+      PHP_IDE_CONFIG: serverName=srt
+    command:
+      - 'srt-test'
     volumes:
       - ../:/app:rw
