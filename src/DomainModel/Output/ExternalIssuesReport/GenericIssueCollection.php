@@ -21,7 +21,7 @@ class GenericIssueCollection implements \Iterator
         return $this;
     }
 
-    public function current(): GenericIssue
+    public function current(): GenericIssue|false
     {
         return current($this->issues);
     }
@@ -38,7 +38,7 @@ class GenericIssueCollection implements \Iterator
 
     public function valid(): bool
     {
-        return null === key($this->issues);
+        return false !== $this->current();
     }
 
     public function rewind(): void

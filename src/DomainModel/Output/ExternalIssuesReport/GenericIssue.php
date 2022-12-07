@@ -8,6 +8,9 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Secondar
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum;
 
+/**
+ * @codeCoverageIgnore
+ */
 class GenericIssue
 {
     public function __construct(

@@ -5,6 +5,9 @@ namespace Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue;
 
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location\TextRange;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Location
 {
     public function __construct(

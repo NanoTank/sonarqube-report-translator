@@ -21,7 +21,7 @@ class SecondaryLocationsCollection implements \Iterator
         return $this;
     }
 
-    public function current(): Location
+    public function current(): Location|false
     {
         return current($this->issues);
     }
@@ -38,7 +38,7 @@ class SecondaryLocationsCollection implements \Iterator
 
     public function valid(): bool
     {
-        return null === key($this->issues);
+        return false !== $this->current();
     }
 
     public function rewind(): void

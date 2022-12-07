@@ -5,6 +5,9 @@ namespace Powercloud\SRT\DomainModel\Output;
 
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssueCollection;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ExternalIssuesReport
 {
     public function __construct(
