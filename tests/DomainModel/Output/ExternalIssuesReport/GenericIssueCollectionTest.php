@@ -9,10 +9,46 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssueCollectio
 
 class GenericIssueCollectionTest extends TestCase
 {
+    private GenericIssue $genericIssue1;
+    private GenericIssue $genericIssue2;
     private GenericIssueCollection $testObject;
 
     public function setUp(): void
     {
+        $this->genericIssue1 = new GenericIssue(
+            engineId: 'testEngine',
+            ruleId: 'testRule',
+            severity: GenericIssue\SeverityEnum::Blocker,
+            type: GenericIssue\TypeEnum::Bug,
+            primaryLocation: new GenericIssue\Location(
+                message: 'test',
+                filePath: '/src',
+                textRange: new GenericIssue\Location\TextRange(
+                    startLine: 1,
+                    endLine: 2,
+                    startColumn: 3,
+                    endColumn: 4,
+                )
+            )
+        );
+
+        $this->genericIssue2 = new GenericIssue(
+            engineId: 'testEngine',
+            ruleId: 'testRule',
+            severity: GenericIssue\SeverityEnum::Critical,
+            type: GenericIssue\TypeEnum::Vulnerability,
+            primaryLocation: new GenericIssue\Location(
+                message: 'test',
+                filePath: '/src',
+                textRange: new GenericIssue\Location\TextRange(
+                    startLine: 5,
+                    endLine: 6,
+                    startColumn: 7,
+                    endColumn: 8,
+                )
+            )
+        );
+
         $this->testObject = new GenericIssueCollection();
     }
 
@@ -31,93 +67,25 @@ class GenericIssueCollectionTest extends TestCase
 
     public function testAddMultiple(): void
     {
-        $genericIssue1 = new GenericIssue(
-            engineId: 'testEngine',
-            ruleId: 'testRule',
-            severity: GenericIssue\SeverityEnum::Blocker,
-            type: GenericIssue\TypeEnum::Bug,
-            primaryLocation: new GenericIssue\Location(
-                message: 'test',
-                filePath: '/src',
-                textRange: new GenericIssue\Location\TextRange(
-                    startLine: 1,
-                    endLine: 2,
-                    startColumn: 3,
-                    endColumn: 4,
-                )
-            )
-        );
-
-        $genericIssue2 = new GenericIssue(
-            engineId: 'testEngine',
-            ruleId: 'testRule',
-            severity: GenericIssue\SeverityEnum::Critical,
-            type: GenericIssue\TypeEnum::Vulnerability,
-            primaryLocation: new GenericIssue\Location(
-                message: 'test',
-                filePath: '/src',
-                textRange: new GenericIssue\Location\TextRange(
-                    startLine: 1,
-                    endLine: 2,
-                    startColumn: 3,
-                    endColumn: 4,
-                )
-            )
-        );
-
-        $this->testObject->add($genericIssue1);
-        $this->testObject->add($genericIssue2);
+        $this->testObject->add($this->genericIssue1);
+        $this->testObject->add($this->genericIssue2);
 
         $this->testObject->rewind();
-        $this->assertSame($genericIssue1, $this->testObject->current());
+        $this->assertSame($this->genericIssue1, $this->testObject->current());
         $this->testObject->next();
-        $this->assertSame($genericIssue2, $this->testObject->current());
+        $this->assertSame($this->genericIssue2, $this->testObject->current());
     }
 
     public function testCurrentAndNext()
     {
-        $genericIssue1 = new GenericIssue(
-            engineId: 'testEngine',
-            ruleId: 'testRule',
-            severity: GenericIssue\SeverityEnum::Blocker,
-            type: GenericIssue\TypeEnum::Bug,
-            primaryLocation: new GenericIssue\Location(
-                message: 'test',
-                filePath: '/src',
-                textRange: new GenericIssue\Location\TextRange(
-                    startLine: 1,
-                    endLine: 2,
-                    startColumn: 3,
-                    endColumn: 4,
-                )
-            )
-        );
-
-        $genericIssue2 = new GenericIssue(
-            engineId: 'testEngine',
-            ruleId: 'testRule',
-            severity: GenericIssue\SeverityEnum::Critical,
-            type: GenericIssue\TypeEnum::Vulnerability,
-            primaryLocation: new GenericIssue\Location(
-                message: 'test',
-                filePath: '/src',
-                textRange: new GenericIssue\Location\TextRange(
-                    startLine: 1,
-                    endLine: 2,
-                    startColumn: 3,
-                    endColumn: 4,
-                )
-            )
-        );
-
-        $this->testObject->add($genericIssue1);
-        $this->testObject->add($genericIssue2);
+        $this->testObject->add($this->genericIssue1);
+        $this->testObject->add($this->genericIssue2);
         $this->testObject->rewind();
 
-        $this->assertSame($genericIssue1, $this->testObject->current());
+        $this->assertSame($this->genericIssue1, $this->testObject->current());
 
         $this->testObject->next();
 
-        $this->assertSame($genericIssue2, $this->testObject->current());
+        $this->assertSame($this->genericIssue2, $this->testObject->current());
     }
 }

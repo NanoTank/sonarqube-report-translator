@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
 
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location;
-use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SecondaryLocationsCollection;
+use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SecondaryLocationCollection;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum;
 
@@ -20,7 +20,7 @@ class GenericIssue
         private readonly TypeEnum $type,
         private readonly Location $primaryLocation,
         private readonly int $effortMinutes = 0,
-        private readonly SecondaryLocationsCollection $secondaryLocations = new SecondaryLocationsCollection(),
+        private readonly SecondaryLocationCollection $secondaryLocations = new SecondaryLocationCollection(),
     ) {}
 
     public function getEngineId(): string
@@ -53,7 +53,7 @@ class GenericIssue
         return $this->effortMinutes;
     }
 
-    public function getSecondaryLocations(): SecondaryLocationsCollection
+    public function getSecondaryLocations(): SecondaryLocationCollection
     {
         return $this->secondaryLocations;
     }
