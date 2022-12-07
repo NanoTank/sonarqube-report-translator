@@ -13,3 +13,5 @@ services:
       - 'srt-test'
     volumes:
       - ../:/app:rw
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

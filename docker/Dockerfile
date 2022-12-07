@@ -13,7 +13,9 @@ COPY docker/xdebug.ini $PHP_INI_DIR/conf.d/docker-php-ext-xdebug_config.ini
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-COPY .. /app
-
 WORKDIR /app
+
+COPY . /app
+
+
 
