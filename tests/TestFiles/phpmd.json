@@ -1,0 +1,38 @@
+{
+  "version": "@package_version@",
+  "package": "phpmd",
+  "timestamp": "2022-12-07T10:17:57+00:00",
+  "files": [
+    {
+      "file": "\/app\/TestMe.php",
+      "violations": [
+        {
+          "beginLine": 32,
+          "endLine": 32,
+          "package": null,
+          "function": null,
+          "class": null,
+          "method": null,
+          "description": "Avoid unused private fields such as \u0027$r\u0027.",
+          "rule": "UnusedPrivateField",
+          "ruleSet": "Unused Code Rules",
+          "externalInfoUrl": "https:\/\/phpmd.org\/rules\/unusedcode.html#unusedprivatefield",
+          "priority": 3
+        },
+        {
+          "beginLine": 32,
+          "endLine": 32,
+          "package": null,
+          "function": null,
+          "class": null,
+          "method": null,
+          "description": "Avoid variables with short names like $r. Configured minimum length is 3.",
+          "rule": "ShortVariable",
+          "ruleSet": "Naming Rules",
+          "externalInfoUrl": "https:\/\/phpmd.org\/rules\/naming.html#shortvariable",
+          "priority": 3
+        }
+      ]
+    }
+  ]
+}
