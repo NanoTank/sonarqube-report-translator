@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\DomainModel;
 
-use;
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\AbstractCollection;
 
@@ -25,7 +24,7 @@ class AbstractCollectionTest extends TestCase
 
             public function current(): mixed
             {
-                return current($this->items);
+                return current($this->items) ?: null;
             }
         };
     }
