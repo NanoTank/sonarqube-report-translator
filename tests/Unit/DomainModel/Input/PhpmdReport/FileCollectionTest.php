@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Powercloud\SRT\Tests\DomainModel\Input\DeptracReport;
+namespace Powercloud\SRT\Tests\Unit\DomainModel\Input\PhpmdReport;
 
 use PHPUnit\Framework\TestCase;
-use Powercloud\SRT\DomainModel\Input\DeptracReport\File;
-use Powercloud\SRT\DomainModel\Input\DeptracReport\FileCollection;
+use Powercloud\SRT\DomainModel\Input\PhpmdReport\File;
+use Powercloud\SRT\DomainModel\Input\PhpmdReport\FileCollection;
 
 class FileCollectionTest extends TestCase
 {
@@ -19,13 +19,13 @@ class FileCollectionTest extends TestCase
     public function setUp(): void
     {
         $this->file1 = new File(
-            violations: 12,
-            messages: new File\MessageCollection()
+            file: 'file1',
+            violations: new File\ViolationCollection(),
         );
 
         $this->file2 = new File(
-            violations: 1025,
-            messages: new File\MessageCollection()
+            file: 'file2',
+            violations: new File\ViolationCollection(),
         );
 
         $this->testObject = new FileCollection();

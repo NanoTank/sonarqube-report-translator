@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Powercloud\SRT\Tests\DomainModel\Input\PhpcsReport\File;
+namespace Powercloud\SRT\Tests\Unit\DomainModel\Input\PhpcsReport\File;
 
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport\File\Message;

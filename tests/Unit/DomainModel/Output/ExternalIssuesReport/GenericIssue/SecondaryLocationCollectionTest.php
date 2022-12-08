@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Powercloud\SRT\Tests\DomainModel\Output\ExternalIssuesReport\GenericIssue;
+namespace Powercloud\SRT\Tests\Unit\DomainModel\Output\ExternalIssuesReport\GenericIssue;
 
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location;
