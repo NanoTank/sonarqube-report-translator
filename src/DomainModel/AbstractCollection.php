@@ -7,7 +7,7 @@ abstract class AbstractCollection implements \Iterator
 {
     protected array $items = [];
 
-    public function remove(mixed $key): self
+    public function remove(string|int $key): self
     {
         unset($this->items[$key]);
 
@@ -19,7 +19,7 @@ abstract class AbstractCollection implements \Iterator
         next($this->items);
     }
 
-    public function key(): mixed
+    public function key(): string|int
     {
         return key($this->items);
     }

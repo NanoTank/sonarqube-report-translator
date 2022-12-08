@@ -14,6 +14,9 @@ class FileCollection extends AbstractCollection
         return $this;
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
+     */
     public function current(): File|false
     {
         return current($this->items);

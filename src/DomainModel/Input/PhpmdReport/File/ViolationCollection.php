@@ -14,6 +14,9 @@ class ViolationCollection extends AbstractCollection
         return $this;
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
+     */
     public function current(): Violation|false
     {
         return current($this->items);

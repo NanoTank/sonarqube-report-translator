@@ -14,6 +14,9 @@ class SecondaryLocationCollection extends AbstractCollection
         return $this;
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
+     */
     public function current(): Location|false
     {
         return current($this->items);

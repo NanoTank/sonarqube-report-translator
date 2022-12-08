@@ -14,6 +14,9 @@ class MessageCollection extends AbstractCollection
         return $this;
     }
 
+    /**
+     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
+     */
     public function current(): Message|false
     {
         return current($this->items);
