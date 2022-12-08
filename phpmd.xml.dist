@@ -7,11 +7,14 @@
          xsi:noNamespaceSchemaLocation="
                      http://pmd.sf.net/ruleset_xml_schema.xsd">
     <description>
-        Standard MIS ruleset
+        Standard Project Ruleset
     </description>
 
     <rule ref="rulesets/unusedcode.xml" />
-    <rule ref="rulesets/naming.xml" />
+    <rule ref="rulesets/naming.xml">
+        <exclude name="LongVariable" />
+        <exclude name="LongClassName" />
+    </rule>
     <rule ref="rulesets/cleancode.xml" />
     <rule ref="rulesets/controversial.xml" />
     <rule ref="rulesets/codesize.xml"/>
@@ -20,4 +23,5 @@
     <exclude-pattern>*var/**</exclude-pattern>
     <exclude-pattern>*vendor/**</exclude-pattern>
     <exclude-pattern>*src/**/*Enum.php</exclude-pattern>
+    <exclude-pattern>*src/DomainModel/Output/ExternalIssuesReport/GenericIssue.php</exclude-pattern> #Due to missing full PHP8 support
 </ruleset>

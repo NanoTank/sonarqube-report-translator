@@ -9,6 +9,9 @@ namespace Powercloud\SRT\DomainModel\Input\PhpmdReport\File;
  */
 class Violation
 {
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         private readonly int $beginLine,
         private readonly int $endLine,
