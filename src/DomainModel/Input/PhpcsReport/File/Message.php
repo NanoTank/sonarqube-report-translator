@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpcsReport\File;
@@ -18,7 +19,8 @@ class Message
         private readonly Message\TypeEnum $type,
         private readonly int $line,
         private readonly int $column,
-    ) {}
+    ) {
+    }
 
     public function getMessage(): string
     {
@@ -54,5 +56,4 @@ class Message
     {
         return $this->column;
     }
-
 }

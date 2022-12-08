@@ -1,13 +1,24 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel;
 
+/**
+ * @template TValue
+ * @template-implements \Iterator<int, TValue>
+ */
 abstract class AbstractCollection implements \Iterator
 {
+    /**
+     * @var array<int, TValue>
+     */
     protected array $items = [];
 
-    public function remove(string|int $key): self
+    /**
+     * @return AbstractCollection<TValue>
+     */
+    public function remove(int $key): self
     {
         unset($this->items[$key]);
 
@@ -19,14 +30,14 @@ abstract class AbstractCollection implements \Iterator
         next($this->items);
     }
 
-    public function key(): string|int
+    public function key(): int|null
     {
         return key($this->items);
     }
 
     public function valid(): bool
     {
-        return false !== $this->current();
+        return null !== $this->current();
     }
 
     public function rewind(): void

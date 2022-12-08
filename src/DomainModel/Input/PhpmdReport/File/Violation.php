@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpmdReport\File;
@@ -20,7 +21,8 @@ class Violation
         private readonly string $ruleSet,
         private readonly string $externalInfoUrl,
         private readonly int $priority,
-    ) {}
+    ) {
+    }
 
     public function getBeginLine(): int
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpcsReport;
@@ -12,7 +13,8 @@ class Totals
         private readonly int $errors,
         private readonly int $warnings,
         private readonly int $fixable,
-    ) {}
+    ) {
+    }
 
     public function getErrors(): int
     {
@@ -28,5 +30,4 @@ class Totals
     {
         return $this->fixable;
     }
-
 }

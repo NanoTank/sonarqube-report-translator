@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpcsReport;
@@ -13,7 +14,8 @@ class File
         private readonly int $errors,
         private readonly int $warnings,
         private readonly File\MessageCollection $messages,
-    ) {}
+    ) {
+    }
 
     public function getName(): string
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\DomainModel\Input\PhpmdReport\File;
@@ -10,7 +11,9 @@ use Powercloud\SRT\DomainModel\Input\PhpmdReport\File\ViolationCollection;
 class ViolationCollectionTest extends TestCase
 {
     private Violation $violation1;
+
     private Violation $violation2;
+
     private ViolationCollection $testObject;
 
     public function setUp(): void
@@ -52,11 +55,15 @@ class ViolationCollectionTest extends TestCase
         $this->expectErrorMessage(
             sprintf(
                 'Argument #1 ($violation) must be of type %s, class@anonymous given',
-                Violation::class
-            )
+                Violation::class,
+            ),
         );
 
-        $this->testObject->add(new class{});
+        $this->testObject->add(
+            new class
+            {
+            },
+        );
     }
 
     public function testAddMultiple(): void

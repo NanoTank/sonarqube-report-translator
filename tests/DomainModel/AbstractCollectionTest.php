@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\DomainModel;
@@ -13,7 +14,8 @@ class AbstractCollectionTest extends TestCase
     public function setUp(): void
     {
         $this->testObject = new class extends AbstractCollection {
-            public function __construct() {
+            public function __construct()
+            {
                 $this->items = [
                     'test item 1',
                     'test item 2',
@@ -58,6 +60,8 @@ class AbstractCollectionTest extends TestCase
         $this->assertEquals(0, $this->testObject->key());
         $this->testObject->next();
         $this->assertEquals(1, $this->testObject->key());
+        $this->testObject->next();
+        $this->assertNull($this->testObject->key());
     }
 
     public function testValid()

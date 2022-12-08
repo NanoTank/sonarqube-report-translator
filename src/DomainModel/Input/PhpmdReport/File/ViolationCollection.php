@@ -1,10 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpmdReport\File;
 
 use Powercloud\SRT\DomainModel\AbstractCollection;
 
+/**
+ * @template-extends AbstractCollection<Violation>
+ */
 class ViolationCollection extends AbstractCollection
 {
     public function add(Violation $violation): self
@@ -14,11 +18,8 @@ class ViolationCollection extends AbstractCollection
         return $this;
     }
 
-    /**
-     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
-     */
-    public function current(): Violation|false
+    public function current(): ?Violation
     {
-        return current($this->items);
+        return current($this->items) ?: null;
     }
 }

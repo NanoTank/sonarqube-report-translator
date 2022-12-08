@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
@@ -21,7 +22,8 @@ class GenericIssue
         private readonly Location $primaryLocation,
         private readonly int $effortMinutes = 0,
         private readonly SecondaryLocationCollection $secondaryLocations = new SecondaryLocationCollection(),
-    ) {}
+    ) {
+    }
 
     public function getEngineId(): string
     {

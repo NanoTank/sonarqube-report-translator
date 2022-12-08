@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input;
@@ -15,5 +16,36 @@ class DeptracReport
         private readonly int $allowed,
         private readonly int $warnings,
         private readonly int $errors,
-    ) {}
+    ) {
+    }
+
+    public function getViolations(): int
+    {
+        return $this->violations;
+    }
+
+    public function getSkippedViolations(): int
+    {
+        return $this->skippedViolations;
+    }
+
+    public function getUncovered(): int
+    {
+        return $this->uncovered;
+    }
+
+    public function getAllowed(): int
+    {
+        return $this->allowed;
+    }
+
+    public function getWarnings(): int
+    {
+        return $this->warnings;
+    }
+
+    public function getErrors(): int
+    {
+        return $this->errors;
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\DeptracReport\File;
@@ -14,7 +15,8 @@ class Message
         private readonly string $message,
         private readonly int $line,
         private readonly TypeEnum $type,
-    ) {}
+    ) {
+    }
 
     public function getMessage(): string
     {
@@ -30,6 +32,4 @@ class Message
     {
         return $this->type;
     }
-
-
 }

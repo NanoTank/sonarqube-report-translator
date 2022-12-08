@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpmdReport;
@@ -11,7 +12,8 @@ class File
     public function __construct(
         private readonly string $file,
         private readonly File\ViolationCollection $violations,
-    ) {}
+    ) {
+    }
 
     public function getFile(): string
     {

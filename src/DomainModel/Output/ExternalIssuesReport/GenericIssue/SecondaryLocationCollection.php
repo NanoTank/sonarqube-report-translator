@@ -1,10 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue;
 
 use Powercloud\SRT\DomainModel\AbstractCollection;
 
+/**
+ * @template-extends AbstractCollection<Location>
+ */
 class SecondaryLocationCollection extends AbstractCollection
 {
     public function add(Location $location): self
@@ -14,11 +18,8 @@ class SecondaryLocationCollection extends AbstractCollection
         return $this;
     }
 
-    /**
-     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
-     */
-    public function current(): Location|false
+    public function current(): ?Location
     {
-        return current($this->items);
+        return current($this->items) ?: null;
     }
 }

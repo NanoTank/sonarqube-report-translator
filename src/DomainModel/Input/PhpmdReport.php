@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input;
@@ -13,7 +14,8 @@ class PhpmdReport
         private readonly string $package,
         private readonly string $timestamp,
         private readonly PhpmdReport\FileCollection $files,
-    ) {}
+    ) {
+    }
 
     public function getVersion(): string
     {

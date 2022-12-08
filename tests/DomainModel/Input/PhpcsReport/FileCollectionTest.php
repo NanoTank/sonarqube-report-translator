@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\DomainModel\Input\PhpcsReport;
@@ -10,7 +11,9 @@ use Powercloud\SRT\DomainModel\Input\PhpcsReport\FileCollection;
 class FileCollectionTest extends TestCase
 {
     private File $file1;
+
     private File $file2;
+
     private FileCollection $testObject;
 
     public function setUp(): void
@@ -38,11 +41,15 @@ class FileCollectionTest extends TestCase
         $this->expectErrorMessage(
             sprintf(
                 'Argument #1 ($file) must be of type %s, class@anonymous given',
-                File::class
-            )
+                File::class,
+            ),
         );
 
-        $this->testObject->add(new class{});
+        $this->testObject->add(
+            new class
+            {
+            },
+        );
     }
 
     public function testAddMultiple(): void

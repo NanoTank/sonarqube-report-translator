@@ -1,10 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\DeptracReport;
 
 use Powercloud\SRT\DomainModel\AbstractCollection;
 
+/**
+ * @template-extends AbstractCollection<File>
+ */
 class FileCollection extends AbstractCollection
 {
     public function add(File $file): self
@@ -14,11 +18,8 @@ class FileCollection extends AbstractCollection
         return $this;
     }
 
-    /**
-     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
-     */
-    public function current(): File|false
+    public function current(): ?File
     {
-        return current($this->items);
+        return current($this->items) ?: null;
     }
 }

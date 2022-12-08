@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\DeptracReport;
@@ -13,7 +14,8 @@ class File
     public function __construct(
         private readonly int $violations,
         private readonly MessageCollection $messages,
-    ) {}
+    ) {
+    }
 
     public function getViolations(): int
     {

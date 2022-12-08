@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\DomainModel\Input\PhpcsReport\File;
@@ -10,7 +11,9 @@ use Powercloud\SRT\DomainModel\Input\PhpcsReport\File\MessageCollection;
 class MessageCollectionTest extends TestCase
 {
     private Message $message1;
+
     private Message $message2;
+
     private MessageCollection $testObject;
 
     public function setUp(): void
@@ -43,11 +46,15 @@ class MessageCollectionTest extends TestCase
         $this->expectErrorMessage(
             sprintf(
                 'Argument #1 ($message) must be of type %s, class@anonymous given',
-                Message::class
-            )
+                Message::class,
+            ),
         );
 
-        $this->testObject->add(new class{});
+        $this->testObject->add(
+            new class
+            {
+            },
+        );
     }
 
     public function testAddMultiple(): void

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\DomainModel\Output\ExternalIssuesReport;
@@ -10,7 +11,9 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssueCollectio
 class GenericIssueCollectionTest extends TestCase
 {
     private GenericIssue $genericIssue1;
+
     private GenericIssue $genericIssue2;
+
     private GenericIssueCollection $testObject;
 
     public function setUp(): void
@@ -58,11 +61,15 @@ class GenericIssueCollectionTest extends TestCase
         $this->expectErrorMessage(
             sprintf(
                 'Argument #1 ($issue) must be of type %s, class@anonymous given',
-                GenericIssue::class
-            )
+                GenericIssue::class,
+            ),
         );
 
-        $this->testObject->add(new class{});
+        $this->testObject->add(
+            new class
+            {
+            },
+        );
     }
 
     public function testAddMultiple(): void

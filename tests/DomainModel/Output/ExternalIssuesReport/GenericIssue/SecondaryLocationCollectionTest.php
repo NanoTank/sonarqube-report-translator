@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\DomainModel\Output\ExternalIssuesReport\GenericIssue;
@@ -22,11 +23,15 @@ class SecondaryLocationCollectionTest extends TestCase
         $this->expectErrorMessage(
             sprintf(
                 'Argument #1 ($location) must be of type %s, class@anonymous given',
-                Location::class
-            )
+                Location::class,
+            ),
         );
 
-        $this->testObject->add(new class{});
+        $this->testObject->add(
+            new class
+            {
+            },
+        );
     }
 
     public function testAddMultiple(): void

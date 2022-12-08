@@ -1,10 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
 
 use Powercloud\SRT\DomainModel\AbstractCollection;
 
+/**
+ * @template-extends AbstractCollection<GenericIssue>
+ */
 class GenericIssueCollection extends AbstractCollection
 {
     public function add(GenericIssue $issue): self
@@ -14,11 +18,8 @@ class GenericIssueCollection extends AbstractCollection
         return $this;
     }
 
-    /**
-     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
-     */
-    public function current(): GenericIssue|false
+    public function current(): ?GenericIssue
     {
-        return current($this->items);
+        return current($this->items) ?: null;
     }
 }
