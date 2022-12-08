@@ -18,4 +18,5 @@
 
     <exclude-pattern>*var/**</exclude-pattern>
     <exclude-pattern>*vendor/**</exclude-pattern>
+    <exclude-pattern>*src/**/*Enum.php</exclude-pattern>
 </ruleset>
