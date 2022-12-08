@@ -53,6 +53,28 @@
     "auto-scripts": {
       "cache:clear": "symfony-cmd",
       "assets:install %PUBLIC_DIR%": "symfony-cmd"
-    }
+    },
+    "phpmd": [
+      "vendor/bin/phpmd ./ ansi phpmd.xml.dist"
+    ],
+    "phpcs": [
+      "vendor/bin/phpcs --report=full"
+    ],
+    "phpcbf": [
+      "vendor/bin/phpcbf"
+    ],
+    "phpstan": [
+      "vendor/bin/phpstan analyse -c phpstan.neon --error-format=table --ansi"
+    ],
+    "psalm": [
+      "vendor/bin/psalm --no-diff --output-format=compact"
+    ],
+    "deptrac": [
+      "vendor/bin/deptrac analyse --report-uncovered --fail-on-uncovered --formatter=table"
+    ],
+    "test-unit": [
+      "Composer\\Config::disableProcessTimeout",
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit tests"
+    ]
   }
 }
