@@ -15,4 +15,7 @@
     <rule ref="rulesets/cleancode.xml" />
     <rule ref="rulesets/controversial.xml" />
     <rule ref="rulesets/codesize.xml"/>
+
+    <exclude-pattern>*var/**</exclude-pattern>
+    <exclude-pattern>*vendor/**</exclude-pattern>
 </ruleset>
