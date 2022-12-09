@@ -14,7 +14,7 @@ class Location
     public function __construct(
         private readonly string $message,
         private readonly string $filePath,
-        private readonly TextRange $textRange,
+        private readonly ?TextRange $textRange,
     ) {
     }
 
@@ -28,7 +28,7 @@ class Location
         return $this->filePath;
     }
 
-    public function getTextRange(): TextRange
+    public function getTextRange(): ?TextRange
     {
         return $this->textRange;
     }
