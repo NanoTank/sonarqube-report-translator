@@ -10,42 +10,22 @@ namespace Powercloud\SRT\DomainModel\Input;
 class DeptracReport
 {
     public function __construct(
-        private readonly int $violations,
-        private readonly int $skippedViolations,
-        private readonly int $uncovered,
-        private readonly int $allowed,
-        private readonly int $warnings,
-        private readonly int $errors,
+        private readonly DeptracReport\Report $report,
+        /** @var DeptracReport\File[] $files */
+        private readonly array $files,
     ) {
     }
 
-    public function getViolations(): int
+    public function getReport(): DeptracReport\Report
     {
-        return $this->violations;
+        return $this->report;
     }
 
-    public function getSkippedViolations(): int
+    /**
+     * @return DeptracReport\File[]
+     */
+    public function getFiles(): array
     {
-        return $this->skippedViolations;
-    }
-
-    public function getUncovered(): int
-    {
-        return $this->uncovered;
-    }
-
-    public function getAllowed(): int
-    {
-        return $this->allowed;
-    }
-
-    public function getWarnings(): int
-    {
-        return $this->warnings;
-    }
-
-    public function getErrors(): int
-    {
-        return $this->errors;
+        return $this->files;
     }
 }
