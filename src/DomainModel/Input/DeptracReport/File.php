@@ -13,6 +13,7 @@ class File
         private readonly int $violations,
         /** @var File\Message[] $messages */
         private readonly array $messages,
+        private readonly string $path,
     ) {
     }
 
@@ -27,5 +28,10 @@ class File
     public function getMessages(): array
     {
         return $this->messages;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
     }
 }
