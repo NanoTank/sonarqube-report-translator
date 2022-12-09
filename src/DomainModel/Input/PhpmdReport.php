@@ -7,7 +7,7 @@ namespace Powercloud\SRT\DomainModel\Input;
 /**
  * @codeCoverageIgnore
  */
-class PhpmdReport
+class PhpmdReport implements ReportInterface
 {
     public function __construct(
         private readonly string $version,
