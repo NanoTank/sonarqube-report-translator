@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Transformer;
@@ -23,7 +24,7 @@ class PhpcsTransformer implements TransformerInterface
 
         foreach ($report->getFiles() as $file) {
             foreach ($file->getMessages() as $message) {
-                $severity = match($message->getType()) {
+                $severity = match ($message->getType()) {
                     TypeEnum::Error => SeverityEnum::Major,
                     TypeEnum::Warning => SeverityEnum::Info,
                 };

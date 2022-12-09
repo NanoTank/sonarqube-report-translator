@@ -7,7 +7,7 @@ namespace Powercloud\SRT\DomainModel\Input;
 /**
  * @codeCoverageIgnore
  */
-class PhpcsReport
+class PhpcsReport implements ReportInterface
 {
     public function __construct(
         private readonly PhpcsReport\Totals $totals,
