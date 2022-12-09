@@ -35,7 +35,7 @@ class DeptracTransformer implements TransformerInterface
                     textRange: new TextRange(startLine: $message->getLine())
                 );
                 $externalIssues[] = new ExternalIssuesReport\GenericIssue(
-                    engineId: 'Deptrac',
+                    engineId: 'DEPTRAC',
                     ruleId: 'Bad usage',
                     severity: $severity,
                     type: GenericIssueTypeEnum::CodeSmell,
