@@ -35,7 +35,7 @@ class DeptracTransformerTest extends TestCase
             }
         }
 
-        $this->assertCount(4, $externalIssueReport->getGenericIssueCollection());
+        $this->assertCount(count($filePaths), $externalIssueReport->getGenericIssueCollection());
         foreach ($externalIssueReport->getGenericIssueCollection() as $issueKey => $issue) {
             $severity = match ($severities[$issueKey]) {
                 DeptracTypeEnum::Error => SeverityEnum::Major,

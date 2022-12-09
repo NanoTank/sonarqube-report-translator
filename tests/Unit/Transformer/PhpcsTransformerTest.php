@@ -34,7 +34,7 @@ class PhpcsTransformerTest extends KernelTestCase
             }
         }
 
-        $this->assertCount(4, $externalIssueReport->getGenericIssueCollection());
+        $this->assertCount(count($filePaths), $externalIssueReport->getGenericIssueCollection());
         foreach ($externalIssueReport->getGenericIssueCollection() as $issueKey => $issue) {
             $severity = match ($severities[$issueKey]) {
                 PhpcsTypeEnum::Error => SeverityEnum::Major,
