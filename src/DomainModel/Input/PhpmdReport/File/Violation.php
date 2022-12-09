@@ -15,10 +15,10 @@ class Violation
     public function __construct(
         private readonly int $beginLine,
         private readonly int $endLine,
-        private readonly string $package,
-        private readonly string $function,
-        private readonly string $class,
-        private readonly string $method,
+        private readonly ?string $package,
+        private readonly ?string $function,
+        private readonly ?string $class,
+        private readonly ?string $method,
         private readonly string $description,
         private readonly string $rule,
         private readonly string $ruleSet,
@@ -37,22 +37,22 @@ class Violation
         return $this->endLine;
     }
 
-    public function getPackage(): string
+    public function getPackage(): ?string
     {
         return $this->package;
     }
 
-    public function getFunction(): string
+    public function getFunction(): ?string
     {
         return $this->function;
     }
 
-    public function getClass(): string
+    public function getClass(): ?string
     {
         return $this->class;
     }
 
-    public function getMethod(): string
+    public function getMethod(): ?string
     {
         return $this->method;
     }
