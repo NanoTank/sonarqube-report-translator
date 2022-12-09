@@ -63,7 +63,7 @@ class DeptracTransformerTest extends TestCase
 
     }
 
-    protected function createDeptracReport(): DeptracReport
+    private function createDeptracReport(): DeptracReport
     {
         $report = new Report(
             violations: 5,
