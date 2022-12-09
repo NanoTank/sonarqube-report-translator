@@ -7,7 +7,7 @@ namespace Powercloud\SRT\DomainModel\Input;
 /**
  * @codeCoverageIgnore
  */
-class DeptracReport
+class DeptracReport implements ReportInterface
 {
     public function __construct(
         private readonly DeptracReport\Report $report,

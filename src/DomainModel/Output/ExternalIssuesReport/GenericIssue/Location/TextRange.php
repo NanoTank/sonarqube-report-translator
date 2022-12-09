@@ -11,9 +11,9 @@ class TextRange
 {
     public function __construct(
         private readonly int $startLine,
-        private readonly ?int $endLine,
-        private readonly ?int $startColumn,
-        private readonly ?int $endColumn,
+        private readonly ?int $endLine = null,
+        private readonly ?int $startColumn = null,
+        private readonly ?int $endColumn = null,
     ) {
     }
 

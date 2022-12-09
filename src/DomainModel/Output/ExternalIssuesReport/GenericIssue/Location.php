@@ -14,7 +14,7 @@ class Location
     public function __construct(
         private readonly string $message,
         private readonly string $filePath,
-        private readonly ?TextRange $textRange,
+        private readonly TextRange $textRange,
     ) {
     }
 
