@@ -1,0 +1,72 @@
+{
+  "totals": {
+    "errors": 4,
+    "warnings": 0,
+    "fixable": 4
+  },
+  "files": {
+    "path/to/TestFile1.php": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": []
+    },
+    "path/to/TestFile2.php": {
+      "errors": 1,
+      "warnings": 0,
+      "messages": [
+        {
+          "message": "Function closing brace must go on the next line following the body; found 2 blank lines before brace",
+          "source": "PSR2.Methods.FunctionClosingBrace.SpacingBeforeClose",
+          "severity": 5,
+          "fixable": true,
+          "type": "ERROR",
+          "line": 231,
+          "column": 5
+        }
+      ]
+    },
+    "path/to/TestFile3.php": {
+      "errors": 3,
+      "warnings": 0,
+      "messages": [
+        {
+          "message": "Expected 1 line after declare statement, found 3.",
+          "source": "SlevomatCodingStandard.TypeHints.DeclareStrictTypes.IncorrectWhitespaceAfterDeclare",
+          "severity": 5,
+          "fixable": true,
+          "type": "ERROR",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "message": "Header blocks must be separated by a single blank line",
+          "source": "PSR12.Files.FileHeader.SpacingAfterBlock",
+          "severity": 5,
+          "fixable": true,
+          "type": "ERROR",
+          "line": 3,
+          "column": 24
+        },
+        {
+          "message": "Opening brace must not be followed by a blank line",
+          "source": "PSR12.Classes.OpeningBraceSpace.Found",
+          "severity": 5,
+          "fixable": true,
+          "type": "ERROR",
+          "line": 18,
+          "column": 1
+        }
+      ]
+    },
+    "path/to/TestFile4.php": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": []
+    },
+    "path/to/TestFile5.php": {
+      "errors": 0,
+      "warnings": 0,
+      "messages": []
+    }
+  }
+}
