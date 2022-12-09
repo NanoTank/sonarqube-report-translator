@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\DeptracReport\File;
 
-use Powercloud\SRT\DomainModel\Input\DeptracReport\File\Message\TypeEnum;
-
 /**
  * @codeCoverageIgnore
  */
@@ -14,7 +12,7 @@ class Message
     public function __construct(
         private readonly string $message,
         private readonly int $line,
-        private readonly TypeEnum $type,
+        private readonly Message\TypeEnum $type,
     ) {
     }
 
@@ -28,7 +26,7 @@ class Message
         return $this->line;
     }
 
-    public function getType(): TypeEnum
+    public function getType(): Message\TypeEnum
     {
         return $this->type;
     }

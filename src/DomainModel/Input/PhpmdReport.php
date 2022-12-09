@@ -13,7 +13,8 @@ class PhpmdReport
         private readonly string $version,
         private readonly string $package,
         private readonly string $timestamp,
-        private readonly PhpmdReport\FileCollection $files,
+        /** @var PhpmdReport\File[] $files */
+        private readonly array $files,
     ) {
     }
 
@@ -32,7 +33,10 @@ class PhpmdReport
         return $this->timestamp;
     }
 
-    public function getFiles(): PhpmdReport\FileCollection
+    /**
+     * @return PhpmdReport\File[]
+     */
+    public function getFiles(): array
     {
         return $this->files;
     }

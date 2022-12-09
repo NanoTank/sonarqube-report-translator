@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpcsReport\File;
 
-use Powercloud\SRT\DomainModel\Input\PhpcsReport\File\Message\TypeEnum;
-
 /**
  * @codeCoverageIgnore
  */
@@ -42,7 +40,7 @@ class Message
         return $this->fixable;
     }
 
-    public function getType(): TypeEnum
+    public function getType(): Message\TypeEnum
     {
         return $this->type;
     }

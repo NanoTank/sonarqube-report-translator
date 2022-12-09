@@ -13,7 +13,8 @@ class File
         private readonly string $name,
         private readonly int $errors,
         private readonly int $warnings,
-        private readonly File\MessageCollection $messages,
+        /** @var File\Message[] $messages */
+        private readonly array $messages,
     ) {
     }
 
@@ -32,7 +33,10 @@ class File
         return $this->warnings;
     }
 
-    public function getMessages(): File\MessageCollection
+    /**
+     * @return File\Message[]
+     */
+    public function getMessages(): array
     {
         return $this->messages;
     }

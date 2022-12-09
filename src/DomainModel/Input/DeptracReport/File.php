@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\DeptracReport;
 
-use Powercloud\SRT\DomainModel\Input\DeptracReport\File\MessageCollection;
-
 /**
  * @codeCoverageIgnore
  */
@@ -13,7 +11,8 @@ class File
 {
     public function __construct(
         private readonly int $violations,
-        private readonly MessageCollection $messages,
+        /** @var File\Message[] $messages */
+        private readonly array $messages,
     ) {
     }
 
@@ -22,7 +21,10 @@ class File
         return $this->violations;
     }
 
-    public function getMessages(): MessageCollection
+    /**
+     * @return File\Message[]
+     */
+    public function getMessages(): array
     {
         return $this->messages;
     }

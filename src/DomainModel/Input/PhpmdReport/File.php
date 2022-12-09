@@ -11,7 +11,8 @@ class File
 {
     public function __construct(
         private readonly string $file,
-        private readonly File\ViolationCollection $violations,
+        /** @var File\Violation[] $violations */
+        private readonly array $violations,
     ) {
     }
 
@@ -20,7 +21,10 @@ class File
         return $this->file;
     }
 
-    public function getViolations(): File\ViolationCollection
+    /**
+     * @return File\Violation[]
+     */
+    public function getViolations(): array
     {
         return $this->violations;
     }

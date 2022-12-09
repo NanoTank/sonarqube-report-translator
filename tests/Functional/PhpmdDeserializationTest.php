@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Functional;
 
+use Powercloud\SRT\DomainModel\Input\PhpcsReport\File;
+use Powercloud\SRT\DomainModel\Input\PhpcsReport\FileCollection;
 use Powercloud\SRT\DomainModel\Input\PhpmdReport;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Serializer\SerializerInterface;

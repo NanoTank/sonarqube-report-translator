@@ -11,7 +11,8 @@ class PhpcsReport
 {
     public function __construct(
         private readonly PhpcsReport\Totals $totals,
-        private readonly PhpcsReport\FileCollection $files,
+        /** @var PhpcsReport\File[] $files */
+        private readonly array $files,
     ) {
     }
 
@@ -20,7 +21,10 @@ class PhpcsReport
         return $this->totals;
     }
 
-    public function getFiles(): PhpcsReport\FileCollection
+    /**
+     * @return PhpcsReport\File[]
+     */
+    public function getFiles(): array
     {
         return $this->files;
     }
