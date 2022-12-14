@@ -16,10 +16,14 @@ class PhpcsTransformer implements TransformerInterface
 {
     /**
      * @param PhpcsReport $report
+     * @param TransformerOptions $transformerOptions
+     *
      * @return ExternalIssuesReport
      */
-    public function transform(ReportInterface $report): ExternalIssuesReport
-    {
+    public function transform(
+        ReportInterface $report,
+        TransformerOptions $transformerOptions = new TransformerOptions(),
+    ): ExternalIssuesReport {
         $externalIssues = [];
 
         foreach ($report->getFiles() as $file) {
@@ -34,19 +38,24 @@ class PhpcsTransformer implements TransformerInterface
                 );
                 $location = new Location(
                     message: $message->getMessage(),
-                    filePath: $file->getName(),
+                    filePath: $file->getPath(),
                     textRange: $textRange
                 );
                 $externalIssues[] = new ExternalIssuesReport\GenericIssue(
                     engineId: 'PHPCS',
                     ruleId: $message->getSource(),
-                    severity: $severity,
-                    type: GenericIssueTypeEnum::CodeSmell,
+                    severity: $transformerOptions->getDefaultSeverity() ?: $severity,
+                    type: $transformerOptions->getDefaultType() ?: GenericIssueTypeEnum::CodeSmell,
                     primaryLocation: $location,
                 );
             }
         }
 
         return new ExternalIssuesReport($externalIssues);
+    }
+
+    public function supports(ReportInterface $report): bool
+    {
+        return $report instanceof PhpcsReport;
     }
 }

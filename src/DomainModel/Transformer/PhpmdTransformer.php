@@ -17,10 +17,14 @@ class PhpmdTransformer implements TransformerInterface
 {
     /**
      * @param PhpmdReport $report
+     * @param TransformerOptions $transformerOptions
+     *
      * @return ExternalIssuesReport
      */
-    public function transform(ReportInterface $report): ExternalIssuesReport
-    {
+    public function transform(
+        ReportInterface $report,
+        TransformerOptions $transformerOptions = new TransformerOptions(),
+    ): ExternalIssuesReport {
         $externalIssues = [];
 
         foreach ($report->getFiles() as $file) {
@@ -33,7 +37,7 @@ class PhpmdTransformer implements TransformerInterface
                     message: sprintf(
                         'Description: %s | URL: %s',
                         $violation->getDescription(),
-                        $violation->getExternalInfoUrl()
+                        $violation->getExternalInfoUrl(),
                     ),
                     filePath: $file->getFile(),
                     textRange: $textRange
@@ -41,13 +45,18 @@ class PhpmdTransformer implements TransformerInterface
                 $externalIssues[] = new GenericIssue(
                     engineId: 'PHPMD',
                     ruleId: $violation->getRule(),
-                    severity: SeverityEnum::Major,
-                    type: TypeEnum::CodeSmell,
+                    severity: $transformerOptions->getDefaultSeverity() ?: SeverityEnum::Major,
+                    type: $transformerOptions->getDefaultType() ?: TypeEnum::CodeSmell,
                     primaryLocation: $location
                 );
             }
         }
 
         return new ExternalIssuesReport($externalIssues);
+    }
+
+    public function supports(ReportInterface $report): bool
+    {
+        return $report instanceof PhpmdReport;
     }
 }

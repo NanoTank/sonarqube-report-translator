@@ -10,17 +10,12 @@ namespace Powercloud\SRT\DomainModel\Input\PhpcsReport;
 class File
 {
     public function __construct(
-        private readonly string $name,
         private readonly int $errors,
         private readonly int $warnings,
         /** @var File\Message[] $messages */
         private readonly array $messages,
+        private readonly string $path,
     ) {
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     public function getErrors(): int
@@ -39,5 +34,10 @@ class File
     public function getMessages(): array
     {
         return $this->messages;
+    }
+
+    public function getPath(): string
+    {
+        return $this->path;
     }
 }

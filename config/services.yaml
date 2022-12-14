@@ -22,3 +22,11 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    _instanceof:
+        Powercloud\SRT\DomainModel\Transformer\TransformerInterface:
+            tags: ['srt-input-transformer']
+
+    Powercloud\SRT\Service\ReportToSonarqubeConverterService:
+        arguments:
+            $transformers: !tagged 'srt-input-transformer'

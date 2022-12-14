@@ -10,7 +10,7 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     private DenormalizerInterface $denormalizer;
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): DeptracReport
     {
         /** @var DeptracReport\Report $report */
         $report = $this->denormalizer->denormalize(
@@ -43,12 +43,12 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         return new DeptracReport($report, $files);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null)
+    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
     {
         return $type === DeptracReport::class;
     }
 
-    public function setDenormalizer(DenormalizerInterface $denormalizer)
+    public function setDenormalizer(DenormalizerInterface $denormalizer): void
     {
         $this->denormalizer = $denormalizer;
     }
