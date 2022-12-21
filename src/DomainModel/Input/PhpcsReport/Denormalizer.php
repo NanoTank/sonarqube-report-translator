@@ -10,18 +10,22 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     private DenormalizerInterface $denormalizer;
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): PhpcsReport
-    {
+    public function denormalize(
+        mixed $data,
+        string $type,
+        string $format = null,
+        array $context = []
+    ): PhpcsReport {
         if (!isset($data['totals'])) {
-            throw new \LogicException('Missing `totals` in the phpcs report data');
+            throw new \LogicException('Missing [totals] in the phpcs report data');
         }
 
         /** @var PhpcsReport\Totals $report */
         $totals = $this->denormalizer->denormalize(
-            $data['totals'],
-            PhpcsReport\Totals::class,
-            $format,
-            $context,
+            data: $data['totals'],
+            type: PhpcsReport\Totals::class,
+            format: $format,
+            context: $context,
         );
         /** @var PhpcsReport\File[] $files */
         $files = [];
@@ -32,27 +36,39 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
             foreach ($fileIssues['messages'] ?? [] as $messageData) {
                 /** @var PhpcsReport\File\Message $message */
                 $message = $this->denormalizer->denormalize(
-                    $messageData,
-                    PhpcsReport\File\Message::class,
-                    $format,
-                    $context,
+                    data: $messageData,
+                    type: PhpcsReport\File\Message::class,
+                    format: $format,
+                    context: $context,
                 );
 
                 $messages[] = $message;
             }
 
-            $files[] = new PhpcsReport\File($fileIssues['errors'], $fileIssues['warnings'], $messages , $filePath);
+            $files[] = new PhpcsReport\File(
+                errors: $fileIssues['errors'],
+                warnings: $fileIssues['warnings'],
+                messages: $messages,
+                path: $filePath
+            );
         }
 
         return new PhpcsReport($totals, $files);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
-    {
+    public function supportsDenormalization(
+        mixed $data,
+        string $type,
+        string $format = null,
+        array $context = []
+    ): bool {
         return $type === PhpcsReport::class;
     }
 
-    public function setDenormalizer(DenormalizerInterface $denormalizer)
+    /**
+     * @codeCoverageIgnore
+     */
+    public function setDenormalizer(DenormalizerInterface $denormalizer): void
     {
         $this->denormalizer = $denormalizer;
     }
