@@ -44,7 +44,10 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
             $files[] = new DeptracReport\File($fileIssues['violations'] ?? 0, $messages, $filePath);
         }
 
-        return new DeptracReport($report, $files);
+        return new DeptracReport(
+            report: $report,
+            files: $files
+        );
     }
 
     public function supportsDenormalization(
@@ -56,6 +59,9 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         return $type === DeptracReport::class;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function setDenormalizer(DenormalizerInterface $denormalizer): void
     {
         $this->denormalizer = $denormalizer;

@@ -15,12 +15,6 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum
 
 class PhpmdTransformer implements TransformerInterface
 {
-    /**
-     * @param PhpmdReport $report
-     * @param TransformerOptions $transformerOptions
-     *
-     * @return ExternalIssuesReport
-     */
     public function transform(
         ReportInterface $report,
         TransformerOptions $transformerOptions = new TransformerOptions(),

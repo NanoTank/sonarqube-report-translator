@@ -53,7 +53,10 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
             );
         }
 
-        return new PhpcsReport($totals, $files);
+        return new PhpcsReport(
+            totals: $totals,
+            files: $files
+        );
     }
 
     public function supportsDenormalization(
