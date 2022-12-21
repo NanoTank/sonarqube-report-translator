@@ -43,7 +43,7 @@ class DeptracTransformerTest extends TestCase
             };
 
             $this->assertSame('DEPTRAC', $issue->getEngineId());
-            $this->assertSame('Bad usage', $issue->getRuleId());
+            $this->assertSame('forbiddenDependency', $issue->getRuleId());
             $this->assertEquals($severity, $issue->getSeverity());
             $this->assertEquals(TypeEnum::CodeSmell, $issue->getType());
 

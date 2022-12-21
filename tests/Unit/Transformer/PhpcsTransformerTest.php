@@ -30,7 +30,7 @@ class PhpcsTransformerTest extends KernelTestCase
             foreach ($file->getMessages() as $message) {
                 $messages[] = $message;
                 $severities[] = $message->getType();
-                $filePaths[] = $file->getName();
+                $filePaths[] = $file->getPath();
             }
         }
 
@@ -69,7 +69,6 @@ class PhpcsTransformerTest extends KernelTestCase
     private function createPhpcsReport(): PhpcsReport
     {
         $file1 = new PhpcsReport\File(
-            name: 'path/to/test/file1.php',
             errors: 1,
             warnings: 1,
             messages: [
@@ -91,11 +90,11 @@ class PhpcsTransformerTest extends KernelTestCase
                     line: 254,
                     column: 8
                 ),
-            ]
+            ],
+            path: 'path/to/test/file1.php'
         );
 
         $file2 = new PhpcsReport\File(
-            name: 'path/to/test/file2.php',
             errors: 2,
             warnings: 0,
             messages: [
@@ -117,7 +116,8 @@ class PhpcsTransformerTest extends KernelTestCase
                     line: 254,
                     column: 8
                 ),
-            ]
+            ],
+            path: 'path/to/test/file2.php'
         );
 
         $totals = new PhpcsReport\Totals(
