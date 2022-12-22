@@ -29,22 +29,22 @@ class DenormalizerTest extends TestCase
     public function testDenormalizeWorksCorrectly(array $data): void
     {
         $violation = new PhpmdReport\File\Violation(
-            beginLine: 1,
-            endLine: 1,
-            package: 'Test Package',
-            function: 'testFunction',
-            class: 'testClass',
-            method: 'testMethod',
-            description: 'Avoid unused private fields such as \u0027$r\u0027.',
-            rule: 'UnusedPrivateField',
-            ruleSet: 'Unused Code Rules',
-            externalInfoUrl: 'https:\/\/phpmd.org\/rules\/unusedcode.html#unusedprivatefield',
-            priority: 3
+            beginLine: $data['files'][0]['violations'][0]['beginLine'],
+            endLine: $data['files'][0]['violations'][0]['endLine'],
+            package: $data['files'][0]['violations'][0]['package'],
+            function: $data['files'][0]['violations'][0]['function'],
+            class: $data['files'][0]['violations'][0]['class'],
+            method: $data['files'][0]['violations'][0]['method'],
+            description: $data['files'][0]['violations'][0]['description'],
+            rule: $data['files'][0]['violations'][0]['rule'],
+            ruleSet: $data['files'][0]['violations'][0]['ruleSet'],
+            externalInfoUrl: $data['files'][0]['violations'][0]['externalInfoUrl'],
+            priority: $data['files'][0]['violations'][0]['priority']
         );
 
         $denormalizer = $this->createMock(DenormalizerInterface::class);
         $denormalizer
-            //->expects(self::exactly(2))
+            ->expects(self::once())
             ->method('denormalize')
             ->willReturnCallback(
                 function($data, $type) use ($violation) {

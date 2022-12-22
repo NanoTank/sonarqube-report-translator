@@ -37,20 +37,26 @@ class DenormalizerTest extends TestCase
     public function testDenormalizeWorksCorrectly(array $data): void
     {
         $totals = new PhpcsReport\Totals(
-            errors: 1,
-            warnings: 0,
-            fixable: 1
+            errors: $data['totals']['errors'],
+            warnings: $data['totals']['warnings'],
+            fixable: $data['totals']['fixable']
         );
 
-        $message = new PhpcsReport\File\Message(
-            message: 'Test Message 1',
-            source: 'test source 1',
-            severity: 1,
-            fixable: true,
-            type: PhpcsReport\File\Message\TypeEnum::Error,
-            line: 10,
-            column: 20
-        );
+        $messageKey = '';
+        foreach ($data['files'] as $dataFileKey => $dataFileValues) {
+            $messageKey = $dataFileKey;
+            $message = new PhpcsReport\File\Message(
+                message: $data['files'][$dataFileKey]['messages'][0]['message'],
+                source: $data['files'][$dataFileKey]['messages'][0]['source'],
+                severity: $data['files'][$dataFileKey]['messages'][0]['severity'],
+                fixable: $data['files'][$dataFileKey]['messages'][0]['fixable'],
+                type: PhpcsReport\File\Message\TypeEnum::Error,
+                line: $data['files'][$dataFileKey]['messages'][0]['line'],
+                column: $data['files'][$dataFileKey]['messages'][0]['column']
+            );
+            break;
+        }
+
 
         $denormalizer = $this->createMock(DenormalizerInterface::class);
         $denormalizer
@@ -69,23 +75,43 @@ class DenormalizerTest extends TestCase
 
         $result = $this->testObject->denormalize($data, PhpcsReport::class);
 
-        $this->assertSame(1, $result->getTotals()->getErrors());
-        $this->assertSame(0, $result->getTotals()->getWarnings());
-        $this->assertSame(1, $result->getTotals()->getFixable());
-
-        $this->assertSame(1, $result->getFiles()[0]->getErrors());
-        $this->assertSame(0, $result->getFiles()[0]->getWarnings());
+        $this->assertSame($data['totals']['errors'], $result->getTotals()->getErrors());
+        $this->assertSame($data['totals']['warnings'], $result->getTotals()->getWarnings());
+        $this->assertSame($data['totals']['fixable'], $result->getTotals()->getFixable());
 
         $this->assertCount(1, $result->getFiles());
-        $this->assertSame('path/to/test/report/file', $result->getFiles()[0]->getPath());
+        $this->assertSame($messageKey, $result->getFiles()[0]->getPath());
 
         $this->assertCount(1, $result->getFiles()[0]->getMessages());
         $this->assertSame(PhpcsReport\File\Message\TypeEnum::Error, $result->getFiles()[0]->getMessages()[0]->getType());
-        $this->assertSame(1, $result->getFiles()[0]->getMessages()[0]->getSeverity());
-        $this->assertSame(10, $result->getFiles()[0]->getMessages()[0]->getLine());
-        $this->assertSame(20, $result->getFiles()[0]->getMessages()[0]->getColumn());
-        $this->assertSame('test source 1', $result->getFiles()[0]->getMessages()[0]->getSource());
-        $this->assertSame('Test Message 1', $result->getFiles()[0]->getMessages()[0]->getMessage());
+        $this->assertSame(
+            $data['files'][$messageKey]['messages'][0]['message'],
+            $result->getFiles()[0]->getMessages()[0]->getMessage()
+        );
+        $this->assertSame(
+            $data['files'][$messageKey]['messages'][0]['source'],
+            $result->getFiles()[0]->getMessages()[0]->getSource()
+        );
+        $this->assertSame(
+            $data['files'][$messageKey]['messages'][0]['severity'],
+            $result->getFiles()[0]->getMessages()[0]->getSeverity()
+        );
+        $this->assertSame(
+            $data['files'][$messageKey]['messages'][0]['fixable'],
+            $result->getFiles()[0]->getMessages()[0]->isFixable()
+        );
+        $this->assertSame(
+            PhpcsReport\File\Message\TypeEnum::Error,
+            $result->getFiles()[0]->getMessages()[0]->getType()
+        );
+        $this->assertSame(
+            $data['files'][$messageKey]['messages'][0]['line'],
+            $result->getFiles()[0]->getMessages()[0]->getLine()
+        );
+        $this->assertSame(
+            $data['files'][$messageKey]['messages'][0]['column'],
+            $result->getFiles()[0]->getMessages()[0]->getColumn()
+        );
     }
 
     private function reportDataProvider(): array
@@ -98,13 +124,18 @@ class DenormalizerTest extends TestCase
                         'warnings' => 0,
                         'fixable' => 1,
                     ],
-                    'errors' => [
-
-                    ],
                     'files' => [
                         'path/to/test/report/file' => [
                             'messages' => [
-                                'TestMessage 1',
+                                [
+                                    'message' => 'Header blocks must be separated by a single blank line',
+                                    'source' => 'PSR12.Files.FileHeader.SpacingAfterBlock',
+                                    'severity' => 5,
+                                    'fixable' => true,
+                                    'type' => 'ERROR',
+                                    'line' => 3,
+                                    'column' => 24
+                                ],
                             ],
                             'errors' => 1,
                             'warnings' => 0,

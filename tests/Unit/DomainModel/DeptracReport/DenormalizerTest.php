@@ -29,24 +29,24 @@ class DenormalizerTest extends TestCase
     public function testDenormalizeWorksCorrectly(array $data): void
     {
         $deptracMessage = new DeptracReport\File\Message(
-            message: 'Test Message',
-            line: 10,
+            message: $data['files']['path/to/source/file1.php']['messages'][0]['message'],
+            line: $data['files']['path/to/source/file1.php']['messages'][0]['line'],
             type: DeptracReport\File\Message\TypeEnum::Error
         );
 
         $deptracFile = new DeptracReport\File(
-            violations: 1,
-            messages: [],
-            path: ''
+            violations: $data['files']['path/to/source/file1.php']['violations'],
+            messages: [$deptracMessage],
+            path: 'path/to/source/file1.php'
         );
 
         $deptracReport = new DeptracReport\Report(
-            violations: 1,
-            skippedViolations: 3,
-            uncovered: 0,
-            allowed: 3,
-            warnings: 4,
-            errors: 1
+            violations: $data['Report']['Violations'],
+            skippedViolations: $data['Report']['Skipped violations'],
+            uncovered: $data['Report']['Uncovered'],
+            allowed: $data['Report']['Allowed'],
+            warnings: $data['Report']['Warnings'],
+            errors: $data['Report']['Errors']
         );
 
         $denormalizer = $this->createMock(DenormalizerInterface::class);
@@ -66,21 +66,32 @@ class DenormalizerTest extends TestCase
         $this->testObject->setDenormalizer($denormalizer);
         $result = $this->testObject->denormalize($data, DeptracReport::class);
 
-        $this->assertSame(1, $result->getReport()->getViolations());
-        $this->assertSame(3, $result->getReport()->getSkippedViolations());
-        $this->assertSame(0, $result->getReport()->getUncovered());
-        $this->assertSame(3, $result->getReport()->getAllowed());
-        $this->assertSame(4, $result->getReport()->getWarnings());
-        $this->assertSame(1, $result->getReport()->getErrors());
+        $this->assertSame($data['Report']['Violations'], $result->getReport()->getViolations());
+        $this->assertSame($data['Report']['Skipped violations'], $result->getReport()->getSkippedViolations());
+        $this->assertSame($data['Report']['Uncovered'], $result->getReport()->getUncovered());
+        $this->assertSame($data['Report']['Allowed'], $result->getReport()->getAllowed());
+        $this->assertSame($data['Report']['Warnings'], $result->getReport()->getWarnings());
+        $this->assertSame($data['Report']['Errors'], $result->getReport()->getErrors());
 
         $this->assertCount(1, $result->getFiles());
-        $this->assertSame(1, $result->getFiles()[0]->getViolations());
-        $this->assertSame('path/to/test/report/file', $result->getFiles()[0]->getPath());
+        $this->assertSame(
+            $data['files']['path/to/source/file1.php']['violations'],
+            $result->getFiles()[0]->getViolations()
+        );
+        $this->assertSame('path/to/source/file1.php', $result->getFiles()[0]->getPath());
 
         $this->assertCount(1, $result->getFiles()[0]->getMessages());
-        $this->assertSame('Test Message', $result->getFiles()[0]->getMessages()[0]->getMessage());
-        $this->assertSame(10, $result->getFiles()[0]->getMessages()[0]->getLine());
-        $this->assertSame(DeptracReport\File\Message\TypeEnum::Error, $result->getFiles()[0]->getMessages()[0]->getType());
+        $this->assertSame(
+            $data['files']['path/to/source/file1.php']['messages'][0]['message'],
+            $result->getFiles()[0]->getMessages()[0]->getMessage()
+        );
+        $this->assertSame(
+            $data['files']['path/to/source/file1.php']['messages'][0]['line'],
+            $result->getFiles()[0]->getMessages()[0]->getLine());
+        $this->assertSame(
+            DeptracReport\File\Message\TypeEnum::Error,
+            $result->getFiles()[0]->getMessages()[0]->getType()
+        );
     }
 
     private function reportDataProvider(): array
@@ -89,14 +100,21 @@ class DenormalizerTest extends TestCase
             [
                 [
                     'Report' => [
-                        'errors' => 1,
-                        'warnings' => 0,
-                        'fixable' => 1,
+                        'Violations' => 251,
+                        'Skipped violations' => 0,
+                        'Uncovered' => 802,
+                        'Allowed' => 19456,
+                        'Warnings' => 0,
+                        'Errors' => 1,
                     ],
                     'files' => [
-                        'path/to/test/report/file' => [
+                        'path/to/source/file1.php' => [
                             'messages' => [
-                                'TestMessage 1',
+                                [
+                                    'message' => 'Namespace\Path\To\Ernie must not depend on Namespace\Path\To\Bert',
+                                    'line' => 16,
+                                    'type' => 'error',
+                                ],
                             ],
                             'violations' => 1,
                         ],
