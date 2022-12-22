@@ -26,6 +26,26 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <file>src/Kernel.php</file>
+            <file>src/DomainModel/Input/ReportInterface.php</file>
+            <file>src/DomainModel/Input/DeptracReport.php</file>
+            <file>src/DomainModel/Input/DeptracReport/File.php</file>
+            <file>src/DomainModel/Input/DeptracReport/File/Message.php</file>
+            <file>src/DomainModel/Input/DeptracReport/File/Message/TypeEnum.php</file>
+            <file>src/DomainModel/Input/DeptracReport/Report.php</file>
+            <file>src/DomainModel/Input/PhpcsReport.php</file>
+            <file>src/DomainModel/Input/PhpcsReport/File.php</file>
+            <file>src/DomainModel/Input/PhpcsReport/File/Message.php</file>
+            <file>src/DomainModel/Input/PhpcsReport/File/Message/TypeEnum.php</file>
+            <file>src/DomainModel/Input/PhpcsReport/Totals.php</file>
+            <file>src/DomainModel/Input/PhpmdReport.php</file>
+            <file>src/DomainModel/Input/PhpmdReport/File.php</file>
+            <file>src/DomainModel/Input/PhpmdReport/File/Violation.php</file>
+            <file>src/DomainModel/Input/PhpmdReport/File.php</file>
+            <file>src/DomainModel/Input/PhpmdReport/File.php</file>
+            <directory>src/DomainModel/Output</directory>
+        </exclude>
     </coverage>
 
     <listeners>
