@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\Service;
@@ -34,14 +35,17 @@ class ReportToSonarqubeConverterServiceTest extends TestCase
     public function testConstructWithInvalidTransformers(): void
     {
         $invalidTransformers = [
-            new class{},
-            new class{},
+            new class {
+            },
+            new class {
+            },
         ];
 
         $this->expectException(InvalidParameterException::class);
         $this->expectExceptionMessage(
             'Parameter of type [Powercloud\SRT\DomainModel\Transformer\TransformerInterface] expected, '
-            . 'but [class@anonymous] received');
+            . 'but [class@anonymous] received'
+        );
 
         new ReportToSonarqubeConverterService($invalidTransformers);
     }
@@ -141,7 +145,8 @@ class ReportToSonarqubeConverterServiceTest extends TestCase
         );
         $fullPhpcsReport = new PhpcsReport(
             totals: $phpcsReportTotals,
-            files: [$phpcsReportFile]);
+            files: [$phpcsReportFile]
+        );
 
         $phpmdReportViolation = new PhpmdReport\File\Violation(
             beginLine: 1,

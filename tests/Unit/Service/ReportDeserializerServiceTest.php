@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\Service;
 
-use \Exception;
+use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\DeptracReport;
@@ -37,7 +37,9 @@ class ReportDeserializerServiceTest extends TestCase
         $unsupportedReport = '{"unsupported": {"weird": 4,"stuff": 100}}';
 
         $this->expectException(UnsupportedReportException::class);
-        $this->expectExceptionMessageMatches('/Failed to deserialize report, format not supported. Supported formats are:/');
+        $this->expectExceptionMessageMatches(
+            '/Failed to deserialize report, format not supported. Supported formats are:/'
+        );
 
         $this->testObject->deserialize($unsupportedReport);
     }
