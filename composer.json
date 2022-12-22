@@ -80,11 +80,11 @@
     ],
     "test-unit": [
       "Composer\\Config::disableProcessTimeout",
-      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Unit Tests Suite\""
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Unit Tests Suite\" --coverage-text --coverage-html=/app/tests/Output"
     ],
     "test-functional": [
       "Composer\\Config::disableProcessTimeout",
-      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Functional Tests Suite\""
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Functional Tests Suite\" --coverage-text --coverage-html=/app/tests/Output"
     ]
   }
 }
