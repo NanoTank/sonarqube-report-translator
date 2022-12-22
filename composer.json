@@ -80,11 +80,11 @@
     ],
     "test-unit": [
       "Composer\\Config::disableProcessTimeout",
-      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit tests/Unit"
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Unit Tests Suite\""
     ],
     "test-functional": [
       "Composer\\Config::disableProcessTimeout",
-      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit tests/Functional"
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Functional Tests Suite\""
     ]
   }
 }

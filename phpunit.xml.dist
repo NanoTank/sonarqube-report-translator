@@ -14,10 +14,10 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Unit Test Suite">
+        <testsuite name="Unit Tests Suite">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="Project Functional Test Suite">
+        <testsuite name="Functional Tests Suite">
             <directory>tests/Functional</directory>
         </testsuite>
     </testsuites>
