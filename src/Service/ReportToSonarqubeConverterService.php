@@ -8,6 +8,7 @@ use Powercloud\SRT\DomainModel\Input\ReportInterface;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
 use Powercloud\SRT\DomainModel\Transformer\TransformerInterface;
 use Powercloud\SRT\DomainModel\Transformer\TransformerOptions;
+use Powercloud\SRT\Exception\InvalidParameterException;
 use Powercloud\SRT\Exception\UnsupportedReportException;
 use Powercloud\SRT\Exception\UnsupportedReportForTransformer;
 
@@ -23,9 +24,9 @@ class ReportToSonarqubeConverterService implements ReportToSonarqubeConverterInt
     ) {
         foreach ($transformers as $transformer) {
             if (!$transformer instanceof TransformerInterface) {
-                throw new \ErrorException(
+                throw new InvalidParameterException(
                     message: sprintf(
-                        'Expected parameter of type \'%s\', recived \'%s\'',
+                        'Parameter of type [%s] expected, but [%s] received',
                         TransformerInterface::class,
                         get_debug_type($transformer),
                     ),
