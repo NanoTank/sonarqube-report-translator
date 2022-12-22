@@ -58,14 +58,11 @@ class ReportDeserializerService implements ReportDeserializerInterface
         );
     }
 
-    /**
-     * @param string $report
-     * @param class-string $targetReportClass
-     *
-     * @return ReportInterface|null
-     */
-    private function attemptDeserialization(string $report, string $targetReportClass, string $format): ?ReportInterface
-    {
+    private function attemptDeserialization(
+        string $report,
+        string $targetReportClass,
+        string $format
+    ): ?ReportInterface {
         try {
             $report = $this->serializer->deserialize($report, $targetReportClass, $format);
 
@@ -77,7 +74,8 @@ class ReportDeserializerService implements ReportDeserializerInterface
         } catch (\Throwable $exception) {
             $this->logger->info(
                 sprintf(
-                    'Attempted to deserialize report into a deptrac format, but failed with message %s',
+                    'Attempted to deserialize report into a [%s] format, but failed with message: %s',
+                    $format,
                     $exception->getMessage(),
                 ),
             );
