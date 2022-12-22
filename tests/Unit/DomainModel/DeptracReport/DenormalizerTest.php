@@ -123,6 +123,4 @@ class DenormalizerTest extends TestCase
             ],
         ];
     }
-
-
 }
