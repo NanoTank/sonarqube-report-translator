@@ -1,0 +1,37 @@
+{
+  "Report": {
+    "Violations": 251,
+    "Skipped violations": 0,
+    "Uncovered": 802,
+    "Allowed": 19456,
+    "Warnings": 0,
+    "Errors": 0
+  },
+  "files": {
+    "\/path\/to\/source\/file.php": {
+      "messages": [
+        {
+          "message": "Namespace\\Path\\To\\Ernie must not depend on Namespace\\Path\\To\\Bert (BlaBla)",
+          "line": 16,
+          "type": "error"
+        },
+        {
+          "message": "Namespace\\Path\\To\\Samson must not depend on Namespace\\Path\\To\\Tiffy (BlaBla)",
+          "line": 9,
+          "type": "error"
+        }
+      ],
+      "violations": 2
+    },
+    "\/app\/srcLayered\/Crmi\/Contract\/Repository\/JurisdictionCodeRetriever\/GraphQLClientFacade.php": {
+      "messages": [
+        {
+          "message": "Namespace\\Path\\To\\Shakespeare must not depend on Namespace\\Path\\To\\Hemmingway (BlaBla)",
+          "line": 9,
+          "type": "error"
+        }
+      ],
+      "violations": 1
+    }
+  }
+}
