@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\DomainModel\PhpcsReport;
@@ -63,13 +64,14 @@ class DenormalizerTest extends TestCase
             ->expects(self::exactly(2))
             ->method('denormalize')
             ->willReturnCallback(
-                function($data, $type) use ($totals, $message) {
-                    return match($type) {
+                function ($data, $type) use ($totals, $message) {
+                    return match ($type) {
                         PhpcsReport\Totals::class => $totals,
                         PhpcsReport\File\Message::class => $message,
                         default => new \stdClass()
                     };
-            });
+                }
+            );
 
         $this->testObject->setDenormalizer($denormalizer);
 
@@ -83,7 +85,10 @@ class DenormalizerTest extends TestCase
         $this->assertSame($messageKey, $result->getFiles()[0]->getPath());
 
         $this->assertCount(1, $result->getFiles()[0]->getMessages());
-        $this->assertSame(PhpcsReport\File\Message\TypeEnum::Error, $result->getFiles()[0]->getMessages()[0]->getType());
+        $this->assertSame(
+            PhpcsReport\File\Message\TypeEnum::Error,
+            $result->getFiles()[0]->getMessages()[0]->getType()
+        );
         $this->assertSame(
             $data['files'][$messageKey]['messages'][0]['message'],
             $result->getFiles()[0]->getMessages()[0]->getMessage()

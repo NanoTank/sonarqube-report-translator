@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Input\PhpmdReport;
@@ -12,19 +13,19 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
     private DenormalizerInterface $denormalizer;
 
     public function supportsDenormalization(
-        mixed  $data,
+        mixed $data,
         string $type,
         string $format = null,
-        array  $context = []
+        array $context = []
     ): bool {
         return $type === PhpmdReport::class;
     }
 
     public function denormalize(
-        mixed  $data,
+        mixed $data,
         string $type,
         string $format = null,
-        array  $context = []
+        array $context = []
     ): PhpmdReport {
         /** @var File[] $files */
         $files = [];

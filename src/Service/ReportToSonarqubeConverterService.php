@@ -25,7 +25,8 @@ class ReportToSonarqubeConverterService implements ReportToSonarqubeConverterInt
             if (!$transformer instanceof TransformerInterface) {
                 throw new \ErrorException(
                     message: sprintf(
-                        'Expected parameter of type \'%s\', recived \'%s\'', TransformerInterface::class,
+                        'Expected parameter of type \'%s\', recived \'%s\'',
+                        TransformerInterface::class,
                         get_debug_type($transformer),
                     ),
                     code: 1,

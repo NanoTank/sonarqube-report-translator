@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\DomainModel\PhpmdReport;
@@ -47,12 +48,13 @@ class DenormalizerTest extends TestCase
             ->expects(self::once())
             ->method('denormalize')
             ->willReturnCallback(
-                function($data, $type) use ($violation) {
-                    return match($type) {
+                function ($data, $type) use ($violation) {
+                    return match ($type) {
                         PhpmdReport\File\Violation::class => $violation,
                         default => new \stdClass()
                     };
-                });
+                }
+            );
 
         $this->testObject->setDenormalizer($denormalizer);
         $result = $this->testObject->denormalize($data, PhpmdReport::class);
@@ -109,7 +111,6 @@ class DenormalizerTest extends TestCase
             $data['files'][0]['violations'][0]['priority'],
             $result->getFiles()[0]->getViolations()[0]->getPriority()
         );
-
     }
 
     private function reportDataProvider(): array
@@ -134,7 +135,8 @@ class DenormalizerTest extends TestCase
                                     'description' => 'Avoid unused private fields such as \u0027$r\u0027.',
                                     'rule' => 'UnusedPrivateField',
                                     'ruleSet' => 'Unused Code Rules',
-                                    'externalInfoUrl' => 'https:\/\/phpmd.org\/rules\/unusedcode.html#unusedprivatefield',
+                                    'externalInfoUrl'
+                                        => 'https:\/\/phpmd.org\/rules\/unusedcode.html#unusedprivatefield',
                                     'priority' => 3
                                 ],
                             ],

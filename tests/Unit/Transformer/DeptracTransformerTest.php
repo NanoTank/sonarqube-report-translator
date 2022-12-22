@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\Transformer;
@@ -60,7 +61,6 @@ class DeptracTransformerTest extends TestCase
                 $issue->getPrimaryLocation()->getFilePath()
             );
         }
-
     }
 
     private function createDeptracReport(): DeptracReport

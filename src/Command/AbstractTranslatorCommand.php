@@ -42,7 +42,8 @@ abstract class AbstractTranslatorCommand extends Command
                 name: 'severity',
                 mode: InputArgument::OPTIONAL,
                 description: sprintf(
-                    'Forces all the issues in the report to be of the specified severity. Valid values are <comment>%s</comment>',
+                    'Forces all the issues in the report to be of the specified severity. '
+                    . 'Valid values are <comment>%s</comment>',
                     implode('</comment>, <comment>', $issueSeverities),
                 ),
             )
@@ -50,7 +51,8 @@ abstract class AbstractTranslatorCommand extends Command
                 name: 'issueType',
                 mode: InputArgument::OPTIONAL,
                 description: sprintf(
-                    'Forces all the issues in the report to be the specified type. Valid values are <comment>%s</comment>',
+                    'Forces all the issues in the report to be the specified type. '
+                    . 'Valid values are <comment>%s</comment>',
                     implode('</comment>, <comment>', $issueTypes),
                 ),
             );

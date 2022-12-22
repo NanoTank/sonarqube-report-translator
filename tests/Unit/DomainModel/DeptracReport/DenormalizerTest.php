@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Unit\DomainModel\DeptracReport;
@@ -54,14 +55,15 @@ class DenormalizerTest extends TestCase
             ->expects(self::exactly(2))
             ->method('denormalize')
             ->willReturnCallback(
-                function($data, $type) use ($deptracMessage, $deptracFile, $deptracReport) {
-                    return match($type) {
+                function ($data, $type) use ($deptracMessage, $deptracFile, $deptracReport) {
+                    return match ($type) {
                         DeptracReport\Report::class => $deptracReport,
                         DeptracReport\File::class => $deptracFile,
                         DeptracReport\File\Message::class => $deptracMessage,
                         default => new \stdClass()
                     };
-                });
+                }
+            );
 
         $this->testObject->setDenormalizer($denormalizer);
         $result = $this->testObject->denormalize($data, DeptracReport::class);
@@ -87,7 +89,8 @@ class DenormalizerTest extends TestCase
         );
         $this->assertSame(
             $data['files']['path/to/source/file1.php']['messages'][0]['line'],
-            $result->getFiles()[0]->getMessages()[0]->getLine());
+            $result->getFiles()[0]->getMessages()[0]->getLine()
+        );
         $this->assertSame(
             DeptracReport\File\Message\TypeEnum::Error,
             $result->getFiles()[0]->getMessages()[0]->getType()
