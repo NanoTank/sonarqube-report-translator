@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Powercloud\SRT\Tests\Unit\Transformer;
 
 use Powercloud\SRT\DomainModel\Input\PhpmdReport;
+use Powercloud\SRT\DomainModel\Input\ReportInterface;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum;
 use Powercloud\SRT\DomainModel\Transformer\PhpmdTransformer;
@@ -17,6 +18,15 @@ class PhpmdTransformerTest extends KernelTestCase
     public function setUp(): void
     {
         $this->testObject = new PhpmdTransformer();
+    }
+
+    public function testSupportsCorrectClasses(): void
+    {
+        $supportedReport = $this->createMock(PhpmdReport::class);
+        $unsupportedReport = new class implements ReportInterface{};
+
+        $this->assertTrue($this->testObject->supports($supportedReport));
+        $this->assertFalse($this->testObject->supports($unsupportedReport));
     }
 
     public function testTransformCreatesValidReport(): void
