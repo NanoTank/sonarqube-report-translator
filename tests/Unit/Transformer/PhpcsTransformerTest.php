@@ -6,6 +6,7 @@ namespace Powercloud\SRT\Tests\Unit\Transformer;
 
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport\File\Message\TypeEnum as PhpcsTypeEnum;
+use Powercloud\SRT\DomainModel\Input\ReportInterface;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum as GenericIssueTypeEnum;
 use Powercloud\SRT\DomainModel\Transformer\PhpcsTransformer;
@@ -18,6 +19,15 @@ class PhpcsTransformerTest extends KernelTestCase
     public function setUp(): void
     {
         $this->testObject = new PhpcsTransformer();
+    }
+
+    public function testSupportsCorrectClasses(): void
+    {
+        $supportedReport = $this->createMock(PhpcsReport::class);
+        $unsupportedReport = new class implements ReportInterface{};
+
+        $this->assertTrue($this->testObject->supports($supportedReport));
+        $this->assertFalse($this->testObject->supports($unsupportedReport));
     }
 
     public function testTransformCreatesValidReport(): void
