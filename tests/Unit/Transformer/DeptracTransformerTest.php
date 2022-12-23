@@ -7,6 +7,7 @@ namespace Powercloud\SRT\Tests\Unit\Transformer;
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\DeptracReport;
 use Powercloud\SRT\DomainModel\Input\DeptracReport\Report;
+use Powercloud\SRT\DomainModel\Input\ReportInterface;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum;
 use Powercloud\SRT\DomainModel\Input\DeptracReport\File\Message\TypeEnum as DeptracTypeEnum;
@@ -19,6 +20,15 @@ class DeptracTransformerTest extends TestCase
     public function setUp(): void
     {
         $this->testObject = new DeptracTransformer();
+    }
+
+    public function testSupportsCorrectClasses(): void
+    {
+        $supportedReport = $this->createMock(DeptracReport::class);
+        $unsupportedReport = new class implements ReportInterface{};
+
+        $this->assertTrue($this->testObject->supports($supportedReport));
+        $this->assertFalse($this->testObject->supports($unsupportedReport));
     }
 
     public function testTransformCreatesValidReport(): void
