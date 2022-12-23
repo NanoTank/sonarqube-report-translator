@@ -7,6 +7,7 @@ namespace Powercloud\SRT\Tests\Unit\DomainModel\PhpcsReport;
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport\Denormalizer;
+use stdClass;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DenormalizerTest extends TestCase
@@ -21,7 +22,7 @@ class DenormalizerTest extends TestCase
     public function testSupportsCorrectReportClass(): void
     {
         $this->assertTrue($this->testObject->supportsDenormalization([], PhpcsReport::class));
-        $this->assertFalse($this->testObject->supportsDenormalization([], \stdClass::class));
+        $this->assertFalse($this->testObject->supportsDenormalization([], stdClass::class));
     }
 
     public function testDenormalizeWithMissingTotalsInReportThrowsException(): void
@@ -68,7 +69,7 @@ class DenormalizerTest extends TestCase
                     return match ($type) {
                         PhpcsReport\Totals::class => $totals,
                         PhpcsReport\File\Message::class => $message,
-                        default => new \stdClass()
+                        default => new stdClass()
                     };
                 }
             );

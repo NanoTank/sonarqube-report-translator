@@ -47,7 +47,7 @@ class ReportDeserializerServiceTest extends TestCase
     /**
      * @dataProvider reportProvider
      */
-    public function testDeserializationLogsExceptions(string $report, string $format): void
+    public function testDeserializationLogsExceptions(string $report): void
     {
         $this->logger
             ->expects(self::atLeastOnce())

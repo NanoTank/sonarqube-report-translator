@@ -7,6 +7,7 @@ namespace Powercloud\SRT\Tests\Unit\DomainModel\DeptracReport;
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\DeptracReport;
 use Powercloud\SRT\DomainModel\Input\DeptracReport\Denormalizer;
+use stdClass;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DenormalizerTest extends TestCase
@@ -21,7 +22,7 @@ class DenormalizerTest extends TestCase
     public function testSupportsCorrectReportClass(): void
     {
         $this->assertTrue($this->testObject->supportsDenormalization([], DeptracReport::class));
-        $this->assertFalse($this->testObject->supportsDenormalization([], \stdClass::class));
+        $this->assertFalse($this->testObject->supportsDenormalization([], stdClass::class));
     }
 
     /**
@@ -60,7 +61,7 @@ class DenormalizerTest extends TestCase
                         DeptracReport\Report::class => $deptracReport,
                         DeptracReport\File::class => $deptracFile,
                         DeptracReport\File\Message::class => $deptracMessage,
-                        default => new \stdClass()
+                        default => new stdClass()
                     };
                 }
             );

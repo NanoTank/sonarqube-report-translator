@@ -54,8 +54,7 @@ class ReportToSonarqubeConverterServiceTest extends TestCase
      * @dataProvider reportProvider
      */
     public function testTransformersIfSupportedButUnsuitable(
-        ReportInterface $report,
-        string $reportClass
+        ReportInterface $report
     ): void {
         $this->transformer1
             ->expects(self::once())
@@ -88,8 +87,7 @@ class ReportToSonarqubeConverterServiceTest extends TestCase
      * @dataProvider reportProvider
      */
     public function testTransformersIfSupported(
-        ReportInterface $report,
-        string $reportClass
+        ReportInterface $report
     ): void {
         $externalIssuesReport = $this->createMock(ExternalIssuesReport::class);
 
@@ -196,9 +194,9 @@ class ReportToSonarqubeConverterServiceTest extends TestCase
         );
 
         return [
-            [$fullPhpcsReport, PhpcsReport::class],
-            [$fullPhpmdReport, PhpmdReport::class],
-            [$fullDeptracReport, DeptracReport::class],
+            [$fullPhpcsReport],
+            [$fullPhpmdReport],
+            [$fullDeptracReport],
         ];
     }
 }

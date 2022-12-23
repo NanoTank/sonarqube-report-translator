@@ -24,7 +24,8 @@ class PhpcsTransformerTest extends KernelTestCase
     public function testSupportsCorrectClasses(): void
     {
         $supportedReport = $this->createMock(PhpcsReport::class);
-        $unsupportedReport = new class implements ReportInterface{};
+        $unsupportedReport = new class implements ReportInterface{
+        };
 
         $this->assertTrue($this->testObject->supports($supportedReport));
         $this->assertFalse($this->testObject->supports($unsupportedReport));

@@ -22,6 +22,7 @@
 
     <exclude-pattern>*var/**</exclude-pattern>
     <exclude-pattern>*vendor/**</exclude-pattern>
+    <exclude-pattern>*tests/**</exclude-pattern>
     <exclude-pattern>*src/**/*Enum.php</exclude-pattern>
     <exclude-pattern>*src/DomainModel/Output/ExternalIssuesReport/GenericIssue.php</exclude-pattern> #Due to missing full PHP8 support
 </ruleset>

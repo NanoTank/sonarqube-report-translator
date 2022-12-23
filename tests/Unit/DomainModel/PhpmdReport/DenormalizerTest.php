@@ -7,6 +7,7 @@ namespace Powercloud\SRT\Tests\Unit\DomainModel\PhpmdReport;
 use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\PhpmdReport;
 use Powercloud\SRT\DomainModel\Input\PhpmdReport\Denormalizer;
+use stdClass;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DenormalizerTest extends TestCase
@@ -21,7 +22,7 @@ class DenormalizerTest extends TestCase
     public function testSupportsCorrectReportClass(): void
     {
         $this->assertTrue($this->testObject->supportsDenormalization([], PhpmdReport::class));
-        $this->assertFalse($this->testObject->supportsDenormalization([], \stdClass::class));
+        $this->assertFalse($this->testObject->supportsDenormalization([], stdClass::class));
     }
 
     /**
@@ -51,7 +52,7 @@ class DenormalizerTest extends TestCase
                 function ($data, $type) use ($violation) {
                     return match ($type) {
                         PhpmdReport\File\Violation::class => $violation,
-                        default => new \stdClass()
+                        default => new stdClass()
                     };
                 }
             );
