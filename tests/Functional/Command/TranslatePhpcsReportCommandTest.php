@@ -23,8 +23,5 @@ class TranslatePhpcsReportCommandTest extends KernelTestCase
         ]);
 
         $commandTester->assertCommandIsSuccessful();
-
-        $output = $commandTester->getDisplay();
-        $this->assertStringContainsString('Username: Wouter', $output);
     }
 }
