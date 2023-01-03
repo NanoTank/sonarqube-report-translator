@@ -1,10 +1,19 @@
 # Powercloud Report Translator for Sonarqube
 
 ## Introduction
-This project is meant to bridge the output formats of DEPTRAC, PHPCS and PHPMD reports to Sonarqube's generic input format.
+This project is meant to bridge the output formats of
+**[DEPTRAC](https://github.com/qossmic/deptrac)**,
+**[PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer)**
+and **[PHP Mess Detector](https://phpmd.org/)** reports to
+**[Sonarqube's](https://www.sonarsource.com/products/sonarqube/)**
+[generic issue input format](https://docs.sonarqube.org/latest/analyzing-source-code/importing-external-issues/generic-issue-import-format/).
+It is based on **[Symfony](https://symfony.com/)** 6 
+and uses **[PHPUnit](https://phpunit.de/)** for automated testing and
+**[Composer](https://getcomposer.org/)**.
 
 ## Precondition
-Assuming you have a working Docker environment installed, we've created some Makefile targets for your convenience.
+Assuming you have a working 
+**[Docker](https://www.docker.com/)** environment installed, we've created some Makefile targets for your convenience.
 Navigate into this project directory and run:
 ```shell
 make build
@@ -22,7 +31,7 @@ to open a shell in your Docker container.
 ## Usage
 You can implement this translator in your Jenkins script in order to run it in your CI/CD pipeline.
 Just execute the appropriate translator command from within the Docker container to get a valid 
-Generic Input Format Report generated:
+Generic Issue Input Format report generated:
 ```shell
 bin/console srt:translate:deptrac path/to/input/file.json path/to/output/file.json [--type] [--severity] 
 ```
