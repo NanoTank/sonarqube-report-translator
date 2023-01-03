@@ -19,7 +19,7 @@ class TranslatePhpcsReportCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'path' => __DIR__ . '/../../TestFiles/phpcs.json',
-            'externalIssuesReportPath' => '/../../Output/Functional/ExternalIssuesReport.json'
+            'externalIssuesReportPath' => __DIR__ . '/../../Output/Functional/phpcs.json'
         ]);
 
         $commandTester->assertCommandIsSuccessful();

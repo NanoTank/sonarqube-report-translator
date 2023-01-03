@@ -10,6 +10,7 @@ use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 abstract class AbstractTranslatorCommand extends Command
@@ -78,7 +79,16 @@ abstract class AbstractTranslatorCommand extends Command
 
     protected function writeExternalIssueReportToFile(string $path, ExternalIssuesReport $report): void
     {
-        file_put_contents($path, $this->serializer->serialize($report, 'json'));
+        file_put_contents(
+            $path,
+            $this->serializer->serialize(
+                $report,
+                'json',
+                [
+                    AbstractObjectNormalizer::SKIP_NULL_VALUES => true,
+                ],
+            ),
+        );
     }
 
     protected function getSeverity(InputInterface $input): ?ExternalIssuesReport\GenericIssue\SeverityEnum

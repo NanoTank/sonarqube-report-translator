@@ -19,7 +19,7 @@ class TranslatePhpmdReportCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'path' => __DIR__ . '/../../TestFiles/phpmd.json',
-            'externalIssuesReportPath' => '/../../Output/Functional/ExternalIssuesReport.json'
+            'externalIssuesReportPath' => __DIR__ . '/../../Output/Functional/phpmd.json'
         ]);
 
         $commandTester->assertCommandIsSuccessful();

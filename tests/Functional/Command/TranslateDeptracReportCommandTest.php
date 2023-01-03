@@ -19,7 +19,7 @@ class TranslateDeptracReportCommandTest extends KernelTestCase
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             'path' => __DIR__ . '/../../TestFiles/deptrac.json',
-            'externalIssuesReportPath' => '/../../Output/Functional/ExternalIssuesReport.json'
+            'externalIssuesReportPath' => __DIR__ . '/../../Output/Functional/deptrac.json'
         ]);
 
         $commandTester->assertCommandIsSuccessful();
