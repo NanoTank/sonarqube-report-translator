@@ -100,11 +100,11 @@ class ReportTranslatorCommandTest extends KernelTestCase
         ]);
 
         $outputContent = file_get_contents(__DIR__ . '/../../Output/Functional/phpmd.json');
-        $decodedOutput = json_decode($outputContent);
+        $decodedOutput = json_decode($outputContent, true, 512, JSON_THROW_ON_ERROR);
 
         foreach ($decodedOutput as $testCase) {
             foreach ($testCase as $testObject) {
-                $this->assertEquals($severityEnum->value, $testObject->severity);
+                $this->assertEquals($severityEnum->value, $testObject['severity']);
             }
         }
     }
@@ -127,11 +127,11 @@ class ReportTranslatorCommandTest extends KernelTestCase
         ]);
 
         $outputContent = file_get_contents(__DIR__ . '/../../Output/Functional/phpmd.json');
-        $decodedOutput = json_decode($outputContent);
+        $decodedOutput = json_decode($outputContent, true, 512, JSON_THROW_ON_ERROR);
 
         foreach ($decodedOutput as $testCase) {
             foreach ($testCase as $testObject) {
-                $this->assertEquals($typeEnum->value, $testObject->type);
+                $this->assertEquals($typeEnum->value, $testObject['type']);
             }
         }
     }
