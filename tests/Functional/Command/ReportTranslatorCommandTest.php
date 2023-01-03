@@ -75,7 +75,8 @@ class ReportTranslatorCommandTest extends KernelTestCase
         } catch (FileNotFoundException $e) {
             $this->assertEquals(
                 'File /app/tests/Functional/Command/../../TestFiles/empty.json cannot be read or empty',
-                $e->getMessage());
+                $e->getMessage()
+            );
 
             return;
         }
