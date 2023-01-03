@@ -24,15 +24,9 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
 
     protected function configure()
     {
-        $this
-            ->setName(name: 'srt:translate')
-            ->addArgument(
-                name: 'path',
-                mode: InputArgument::REQUIRED,
-                description: 'The absolute path to the report file format',
-            );
-
         parent::configure();
+
+        $this->setName(name: 'srt:translate');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

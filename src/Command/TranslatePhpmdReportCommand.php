@@ -23,15 +23,9 @@ class TranslatePhpmdReportCommand extends AbstractTranslatorCommand
 
     protected function configure()
     {
-        $this
-            ->setName(name: 'srt:translate:phpmd')
-            ->addArgument(
-                name: 'path',
-                mode: InputArgument::REQUIRED,
-                description: 'The absolute path to the phpmd report file in json format',
-            );
-
         parent::configure();
+
+        $this->setName(name: 'srt:translate:phpmd');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

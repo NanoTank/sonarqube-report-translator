@@ -23,15 +23,9 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
 
     protected function configure()
     {
-        $this
-            ->setName(name: 'srt:translate:phpcs')
-            ->addArgument(
-                name: 'path',
-                mode: InputArgument::REQUIRED,
-                description: 'The absolute path to the phpcs report file in json format',
-            );
-
         parent::configure();
+
+        $this->setName(name: 'srt:translate:phpcs');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

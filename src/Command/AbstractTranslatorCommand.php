@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -35,22 +36,29 @@ abstract class AbstractTranslatorCommand extends Command
 
         $this
             ->addArgument(
+                name: 'path',
+                mode: InputArgument::REQUIRED,
+                description: 'The absolute path to the phpmd report file in json format',
+            )
+            ->addArgument(
                 name: 'externalIssuesReportPath',
                 mode: InputArgument::REQUIRED,
                 description: 'The absolute path of the external issue report path where the sonarqube report is saved',
             )
-            ->addArgument(
+            ->addOption(
                 name: 'severity',
-                mode: InputArgument::OPTIONAL,
+                shortcut: 's',
+                mode: InputOption::VALUE_OPTIONAL,
                 description: sprintf(
                     'Forces all the issues in the report to be of the specified severity. '
                     . 'Valid values are <comment>%s</comment>',
                     implode('</comment>, <comment>', $issueSeverities),
                 ),
             )
-            ->addArgument(
+            ->addOption(
                 name: 'issueType',
-                mode: InputArgument::OPTIONAL,
+                shortcut: 'i',
+                mode: InputOption::VALUE_OPTIONAL,
                 description: sprintf(
                     'Forces all the issues in the report to be the specified type. '
                     . 'Valid values are <comment>%s</comment>',

@@ -23,15 +23,9 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
 
     protected function configure()
     {
-        $this
-            ->setName(name: 'srt:translate:deptrac')
-            ->addArgument(
-                name: 'path',
-                mode: InputArgument::REQUIRED,
-                description: 'The absolute path to the deptrac report file in json format',
-            );
-
         parent::configure();
+
+        $this->setName(name: 'srt:translate:deptrac');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
