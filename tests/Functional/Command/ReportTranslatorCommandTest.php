@@ -83,7 +83,10 @@ class ReportTranslatorCommandTest extends KernelTestCase
         $this->markTestIncomplete('FileNotFoundException was expected but not thrown');
     }
 
-    public function testChangeSeverity(): void
+    /**
+     * @dataProvider severityTypeProvider
+     */
+    public function testChangeSeverity(SeverityEnum $severityEnum): void
     {
         $kernel = self::bootKernel();
         $application = new Application($kernel);
@@ -93,7 +96,7 @@ class ReportTranslatorCommandTest extends KernelTestCase
         $commandTester->execute([
             'path' => __DIR__ . '/../../TestFiles/phpmd.json',
             'externalIssuesReportPath' => __DIR__ . '/../../Output/Functional/phpmd.json',
-            '--severity' => SeverityEnum::Major->value
+            '--severity' => $severityEnum->value
         ]);
 
         $outputContent = file_get_contents(__DIR__ . '/../../Output/Functional/phpmd.json');
@@ -101,24 +104,26 @@ class ReportTranslatorCommandTest extends KernelTestCase
 
         foreach ($decodedOutput as $testCase) {
             foreach ($testCase as $testObject) {
-                $this->assertEquals(SeverityEnum::Major->value, $testObject->severity);
+                $this->assertEquals($severityEnum->value, $testObject->severity);
             }
         }
     }
 
-    public function testChangeIssueType(): void
+    /**
+     * @dataProvider typeEnumProvider
+     */
+    public function testChangeIssueType(TypeEnum $typeEnum): void
     {
-        $this->markTestSkipped('Skipped due to a bug');
-
         $kernel = self::bootKernel();
         $application = new Application($kernel);
 
         $command = $application->find('srt:translate');
         $commandTester = new CommandTester($command);
+
         $commandTester->execute([
             'path' => __DIR__ . '/../../TestFiles/phpmd.json',
             'externalIssuesReportPath' => __DIR__ . '/../../Output/Functional/phpmd.json',
-            '--issueType' => TypeEnum::Bug->value
+            '--issueType' => $typeEnum->value
         ]);
 
         $outputContent = file_get_contents(__DIR__ . '/../../Output/Functional/phpmd.json');
@@ -126,8 +131,18 @@ class ReportTranslatorCommandTest extends KernelTestCase
 
         foreach ($decodedOutput as $testCase) {
             foreach ($testCase as $testObject) {
-                $this->assertEquals(TypeEnum::Bug->value, $testObject->type);
+                $this->assertEquals($typeEnum->value, $testObject->type);
             }
         }
+    }
+
+    private function typeEnumProvider(): array
+    {
+        return [TypeEnum::cases()];
+    }
+
+    private function severityTypeProvider(): array
+    {
+        return [SeverityEnum::cases()];
     }
 }
