@@ -12,6 +12,7 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location\TextRange;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum as GenericIssueTypeEnum;
+use Powercloud\SRT\Exception\UnsupportedReportForTransformer;
 
 class DeptracTransformer implements TransformerInterface
 {
@@ -19,6 +20,15 @@ class DeptracTransformer implements TransformerInterface
         ReportInterface $report,
         TransformerOptions $transformerOptions = new TransformerOptions(),
     ): ExternalIssuesReport {
+        if (false === $report instanceof DeptracReport) {
+            throw new UnsupportedReportForTransformer(
+                sprintf(
+                    'Unsupported report of type [%s], expected [%s]',
+                    get_debug_type($report),
+                    DeptracReport::class,
+                )
+            );
+        }
         $externalIssues = [];
 
         foreach ($report->getFiles() as $file) {

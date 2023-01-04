@@ -11,6 +11,7 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum as GenericIssueTypeEnum;
+use Powercloud\SRT\Exception\UnsupportedReportForTransformer;
 
 class PhpcsTransformer implements TransformerInterface
 {
@@ -18,6 +19,15 @@ class PhpcsTransformer implements TransformerInterface
         ReportInterface $report,
         TransformerOptions $transformerOptions = new TransformerOptions(),
     ): ExternalIssuesReport {
+        if (false === $report instanceof PhpcsReport) {
+            throw new UnsupportedReportForTransformer(
+                sprintf(
+                    'Unsupported report of type [%s], expected [%s]',
+                    get_debug_type($report),
+                    PhpcsReport::class,
+                )
+            );
+        }
         $externalIssues = [];
 
         foreach ($report->getFiles() as $file) {

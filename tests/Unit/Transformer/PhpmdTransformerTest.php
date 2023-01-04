@@ -9,6 +9,7 @@ use Powercloud\SRT\DomainModel\Input\ReportInterface;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum;
 use Powercloud\SRT\DomainModel\Transformer\PhpmdTransformer;
+use Powercloud\SRT\Exception\UnsupportedReportForTransformer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class PhpmdTransformerTest extends KernelTestCase
@@ -28,6 +29,23 @@ class PhpmdTransformerTest extends KernelTestCase
 
         $this->assertTrue($this->testObject->supports($supportedReport));
         $this->assertFalse($this->testObject->supports($unsupportedReport));
+    }
+
+    public function testTransformThrowsExceptionWhenUnsupportedReportType(): void
+    {
+        $report = new class implements ReportInterface {
+        };
+
+        $this->expectException(UnsupportedReportForTransformer::class);
+        $this->expectExceptionMessage(
+            sprintf(
+                'Unsupported report of type [%s], expected [%s]',
+                get_debug_type($report),
+                PhpmdReport::class,
+            )
+        );
+        $this->testObject->transform(report: $report);
+
     }
 
     public function testTransformCreatesValidReport(): void
