@@ -36,7 +36,10 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
     {
         $deptracFileContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
-        /** @var DeptracReport $deptracReport */
+        /**
+         * @var DeptracReport $deptracReport
+         * @psalm-suppress UnnecessaryVarAnnotation
+         */
         $deptracReport = $this->serializer->deserialize($deptracFileContent, DeptracReport::class, 'json');
 
         $externalIssuesReport = $this->deptracTransformer->transform(

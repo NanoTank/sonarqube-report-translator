@@ -37,7 +37,10 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
     {
         $phpcsFileContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
-        /** @var PhpcsReport $phpcsReport */
+        /**
+         * @var PhpcsReport $phpcsReport
+         * @psalm-suppress UnnecessaryVarAnnotation
+         */
         $phpcsReport = $this->serializer->deserialize($phpcsFileContent, PhpcsReport::class, 'json');
 
         $externalIssuesReport = $this->deptracTransformer->transform(

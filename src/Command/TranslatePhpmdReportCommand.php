@@ -37,7 +37,10 @@ class TranslatePhpmdReportCommand extends AbstractTranslatorCommand
     {
         $phpmdFileContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
-        /** @var PhpmdReport $phpmdReport */
+        /**
+         * @var PhpmdReport $phpmdReport
+         * @psalm-suppress UnnecessaryVarAnnotation
+         */
         $phpmdReport = $this->serializer->deserialize($phpmdFileContent, PhpmdReport::class, 'json');
 
         $externalIssuesReport = $this->deptracTransformer->transform(
