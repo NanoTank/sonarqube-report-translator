@@ -12,14 +12,14 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 
     public function denormalize(
         mixed $data,
-        string $type,
+        string $type = DeptracReport\Report::class,
         string $format = null,
         array $context = []
     ): DeptracReport {
         /** @var DeptracReport\Report $report */
         $report = $this->denormalizer->denormalize(
             $data['Report'] ?? [],
-            DeptracReport\Report::class,
+            $type,
             $format,
             $context,
         );
@@ -50,6 +50,7 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         );
     }
 
+    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
     public function supportsDenormalization(
         mixed $data,
         string $type,
