@@ -7,6 +7,7 @@ namespace Powercloud\SRT\Command;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Powercloud\SRT\DomainModel\Transformer\PhpcsTransformer;
 use Powercloud\SRT\DomainModel\Transformer\TransformerOptions;
+use Powercloud\SRT\Exception\UnsupportedReportForTransformer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,6 +29,10 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
         $this->setName(name: 'srt:translate:phpcs');
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws UnsupportedReportForTransformer
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $phpcsFileContent = $this->getFileContent((string) $input->getArgument('path'));
