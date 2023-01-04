@@ -58,12 +58,20 @@ class ReportDeserializerService implements ReportDeserializerInterface
         );
     }
 
+    /**
+     * @param string $report
+     * @param class-string $targetReportClass
+     * @param string $format
+     *
+     * @return ReportInterface|null
+     */
     private function attemptDeserialization(
         string $report,
         string $targetReportClass,
         string $format
     ): ?ReportInterface {
         try {
+            /** @var ReportInterface $report */
             $report = $this->serializer->deserialize($report, $targetReportClass, $format);
 
             if (!$report instanceof $targetReportClass) {

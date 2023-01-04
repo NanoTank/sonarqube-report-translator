@@ -19,6 +19,10 @@ class ReportToSonarqubeConverterService implements ReportToSonarqubeConverterInt
      */
     private readonly iterable $transformers;
 
+    /**
+     * @param TransformerInterface[] $transformers
+     * @throws InvalidParameterException
+     */
     public function __construct(
         iterable $transformers,
     ) {
