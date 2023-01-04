@@ -6,7 +6,6 @@ namespace Powercloud\SRT\Command;
 
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -99,22 +98,14 @@ abstract class AbstractTranslatorCommand extends Command
     /** @SuppressWarnings(PHPMD.StaticAccess) */
     protected function getSeverity(InputInterface $input): ?ExternalIssuesReport\GenericIssue\SeverityEnum
     {
-        try {
-            // @phpstan-ignore-next-line
-            return ExternalIssuesReport\GenericIssue\SeverityEnum::tryFrom((string) $input->getOption('severity'));
-        } catch (InvalidArgumentException) {
-            return null;
-        }
+        // @phpstan-ignore-next-line
+        return ExternalIssuesReport\GenericIssue\SeverityEnum::tryFrom((string)$input->getOption('severity'));
     }
 
     /** @SuppressWarnings(PHPMD.StaticAccess) */
     protected function getIssueType(InputInterface $input): ?ExternalIssuesReport\GenericIssue\TypeEnum
     {
-        try {
-            // @phpstan-ignore-next-line
-            return ExternalIssuesReport\GenericIssue\TypeEnum::tryFrom((string) $input->getOption('issueType'));
-        } catch (InvalidArgumentException) {
-            return null;
-        }
+        // @phpstan-ignore-next-line
+        return ExternalIssuesReport\GenericIssue\TypeEnum::tryFrom((string)$input->getOption('issueType'));
     }
 }
