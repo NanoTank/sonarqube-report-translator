@@ -22,7 +22,7 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
         parent::__construct($serializer);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -31,7 +31,7 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $reportContent = $this->getFileContent($input->getArgument('path'));
+        $reportContent = $this->getFileContent((string) $input->getArgument('path'));
 
         $report = $this->deserializer->deserialize($reportContent);
 
@@ -41,7 +41,7 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'),
             $externalIssuesReport,
         );
 
