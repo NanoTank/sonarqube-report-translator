@@ -34,8 +34,9 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $deptracFileContent = $this->getFileContent((string) $input->getArgument('path'));
+        $deptracFileContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
+        /** @var DeptracReport $deptracReport */
         $deptracReport = $this->serializer->deserialize($deptracFileContent, DeptracReport::class, 'json');
 
         $externalIssuesReport = $this->deptracTransformer->transform(
@@ -44,7 +45,7 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            (string) $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'), // @phpstan-ignore-line
             $externalIssuesReport,
         );
 

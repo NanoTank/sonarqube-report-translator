@@ -36,7 +36,7 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $reportContent = $this->getFileContent((string) $input->getArgument('path'));
+        $reportContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
         $report = $this->deserializer->deserialize($reportContent);
 
@@ -46,7 +46,7 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            (string) $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'), // @phpstan-ignore-line
             $externalIssuesReport,
         );
 

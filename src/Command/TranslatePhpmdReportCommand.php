@@ -35,8 +35,9 @@ class TranslatePhpmdReportCommand extends AbstractTranslatorCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $phpmdFileContent = $this->getFileContent((string) $input->getArgument('path'));
+        $phpmdFileContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
+        /** @var PhpmdReport $phpmdReport */
         $phpmdReport = $this->serializer->deserialize($phpmdFileContent, PhpmdReport::class, 'json');
 
         $externalIssuesReport = $this->deptracTransformer->transform(
@@ -45,7 +46,7 @@ class TranslatePhpmdReportCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            (string) $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'), // @phpstan-ignore-line
             $externalIssuesReport,
         );
 

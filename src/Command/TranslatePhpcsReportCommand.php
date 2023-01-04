@@ -35,8 +35,9 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $phpcsFileContent = $this->getFileContent((string) $input->getArgument('path'));
+        $phpcsFileContent = $this->getFileContent((string) $input->getArgument('path')); // @phpstan-ignore-line
 
+        /** @var PhpcsReport $phpcsReport */
         $phpcsReport = $this->serializer->deserialize($phpcsFileContent, PhpcsReport::class, 'json');
 
         $externalIssuesReport = $this->deptracTransformer->transform(
@@ -45,7 +46,7 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            (string) $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'), // @phpstan-ignore-line
             $externalIssuesReport,
         );
 

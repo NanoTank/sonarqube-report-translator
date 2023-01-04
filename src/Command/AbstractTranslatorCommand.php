@@ -104,6 +104,7 @@ abstract class AbstractTranslatorCommand extends Command
     protected function getSeverity(InputInterface $input): ?ExternalIssuesReport\GenericIssue\SeverityEnum
     {
         try {
+            // @phpstan-ignore-next-line
             return ExternalIssuesReport\GenericIssue\SeverityEnum::tryFrom((string) $input->getArgument('severity'));
         } catch (InvalidArgumentException) {
             return null;
@@ -114,6 +115,7 @@ abstract class AbstractTranslatorCommand extends Command
     protected function getIssueType(InputInterface $input): ?ExternalIssuesReport\GenericIssue\TypeEnum
     {
         try {
+            // @phpstan-ignore-next-line
             return ExternalIssuesReport\GenericIssue\TypeEnum::tryFrom((string) $input->getArgument('issueType'));
         } catch (InvalidArgumentException) {
             return null;

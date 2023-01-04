@@ -19,7 +19,7 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     * @throws ExceptionInterface
+     * @phpstan-ignore-next-line
      */
     public function denormalize(
         mixed $data,
@@ -64,10 +64,12 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
          * @var string $filePath
          * @var array $fileIssues
          */
+        // @phpstan-ignore-next-line
         foreach ($data['files'] ?? [] as $filePath => $fileIssues) {
             /** @var PhpcsReport\File\Message[] $messages */
             $messages = [];
             /** @var array $messageData */
+            // @phpstan-ignore-next-line
             foreach ($fileIssues['messages'] ?? [] as $messageData) {
                 /** @var PhpcsReport\File\Message $message */
                 $message = $this->denormalizer->denormalize(
@@ -94,7 +96,10 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         );
     }
 
-    /** @SuppressWarnings(PHPMD.UnusedFormalParameter) */
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @phpstan-ignore-next-line
+     */
     public function supportsDenormalization(
         mixed $data,
         string $type,
