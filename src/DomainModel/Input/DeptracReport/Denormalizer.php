@@ -3,11 +3,15 @@
 namespace Powercloud\SRT\DomainModel\Input\DeptracReport;
 
 use Powercloud\SRT\DomainModel\Input\DeptracReport;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+/**
+ * @psalm-suppress MissingConstructor
+ */
 class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     private DenormalizerInterface $denormalizer;
@@ -16,8 +20,17 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         mixed $data,
         string $type,
         string $format = null,
-        array $context = []
+        array $context = [],
     ): DeptracReport {
+        if (false === is_array($data)) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    "Unsupported format for argument \$data. Expected [array], received [%s]",
+                    get_debug_type($data),
+                )
+            );
+        }
+
         if (DeptracReport::class !== $type) {
             throw new LogicException(
                 sprintf(
@@ -38,9 +51,14 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         /** @var DeptracReport\File[] $files */
         $files = [];
 
+        /**
+         * @var string $filePath
+         * @var array $fileIssues
+         */
         foreach ($data['files'] ?? [] as $filePath => $fileIssues) {
             /** @var DeptracReport\File\Message[] $messages */
             $messages = [];
+            /** @var array $messageData */
             foreach ($fileIssues['messages'] ?? [] as $messageData) {
                 /** @var DeptracReport\File\Message $message */
                 $message = $this->denormalizer->denormalize(
@@ -53,7 +71,7 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
                 $messages[] = $message;
             }
 
-            $files[] = new DeptracReport\File($fileIssues['violations'] ?? 0, $messages, $filePath);
+            $files[] = new DeptracReport\File((int) ($fileIssues['violations'] ?? 0), $messages, $filePath);
         }
 
         return new DeptracReport(
@@ -67,7 +85,7 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         mixed $data,
         string $type,
         string $format = null,
-        array $context = []
+        array $context = [],
     ): bool {
         return $type === DeptracReport::class;
     }
