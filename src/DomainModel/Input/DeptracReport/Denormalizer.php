@@ -4,7 +4,6 @@ namespace Powercloud\SRT\DomainModel\Input\DeptracReport;
 
 use Powercloud\SRT\DomainModel\Input\DeptracReport;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -22,21 +21,21 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         string $format = null,
         array $context = [],
     ): DeptracReport {
+        if (DeptracReport::class !== $type) {
+            throw new LogicException(
+                sprintf(
+                    'Expected type of [%s], [%s] given',
+                    DeptracReport::class,
+                    $type
+                )
+            );
+        }
+
         if (false === is_array($data)) {
             throw new InvalidArgumentException(
                 sprintf(
                     "Unsupported format for argument \$data. Expected [array], received [%s]",
                     get_debug_type($data),
-                )
-            );
-        }
-
-        if (DeptracReport::class !== $type) {
-            throw new LogicException(
-                sprintf(
-                    'Expected type of %s, %s given',
-                    DeptracReport::class,
-                    $type
                 )
             );
         }
