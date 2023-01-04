@@ -25,3 +25,6 @@
 ###< symfony/phpunit-bridge ###
 
 .idea
+###> qossmic/deptrac-shim ###
+/.deptrac.cache
+###< qossmic/deptrac-shim ###

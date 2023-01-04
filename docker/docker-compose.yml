@@ -15,3 +15,81 @@ services:
       - ../:/app:rw
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  sonar-scanner-local:
+    image: sonarsource/sonar-scanner-cli
+    # To prevent ambiguous network names in jenkins
+    network_mode: host
+    environment:
+      APPLICATION_NAME: "${APPLICATION_NAME}"
+    volumes:
+      - ../:/app
+    command: [
+      "-X",
+      "-Dsonar.host.url=${SONAR_HOST_URL}",
+      "-Dsonar.projectBaseDir=/app",
+      "-Dsonar.sources=/app/src",
+      "-Dsonar.tests=/app/tests",
+      "-Dsonar.login=${SONAR_AUTH_TOKEN}",
+      "-Dsonar.projectName=${APPLICATION_NAME}",
+      "-Dsonar.projectKey=${APPLICATION_NAME}",
+      "-Dsonar.php.tests.reportPath=/app/tests/Output/unit-tests-report.xml",
+      "-Dsonar.php.coverage.reportPaths=/app/tests/Output/unit-tests-coverage.xml",
+      "-Dsonar.php.psalm.reportPaths=/app/tests/Output/psalm.json",
+      "-Dsonar.php.phpstan.reportPaths=/app/tests/Output/phpstan.json",
+      "-Dsonar.externalIssuesReportPaths=/app/tests/Output/phpmd-sonar.json",
+    ]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  ci-sonar-scanner-branch:
+    image: sonarsource/sonar-scanner-cli
+    # To prevent ambiguous network names in jenkins
+    network_mode: host
+    environment:
+      APPLICATION_NAME: "${APPLICATION_NAME}"
+    volumes:
+      - ../:/app
+    command: [
+      "-Dsonar.host.url=${SONAR_HOST_URL}",
+      "-Dsonar.projectBaseDir=/app",
+      "-Dsonar.sources=/app/src",
+      "-Dsonar.tests=/app/tests",
+      "-Dsonar.coverage.exclusions=${SONAR_COVERAGE_EXCLUSIONS}",
+      "-Dsonar.login=${SONAR_AUTH_TOKEN}",
+      "-Dsonar.projectName=${APPLICATION_NAME}",
+      "-Dsonar.projectKey=${APPLICATION_NAME}",
+      "-Dsonar.php.tests.reportPath=/app/tests/Output/unit-tests-report.xml",
+      "-Dsonar.php.coverage.reportPaths=/app/tests/Output/unit-tests-coverage.xml",
+      "-Dsonar.php.psalm.reportPaths=/app/tests/Output/psalm-level-4.json",
+      "-Dsonar.php.phpstan.reportPaths=/app/tests/Output/phpstan-level-4.json",
+      "-Dsonar.branch.name=${BRANCH_NAME}",
+      "-Dsonar.scm.revision=${CORRECT_COMMIT_ID}"
+    ]
+
+  ci-sonar-scanner-pr:
+    image: sonarsource/sonar-scanner-cli
+    # To prevent ambiguous network names in jenkins
+    network_mode: host
+    environment:
+      APPLICATION_NAME: "${APPLICATION_NAME}"
+    volumes:
+      - ../:/app
+    command: [
+      "-Dsonar.host.url=${SONAR_HOST_URL}",
+      "-Dsonar.projectBaseDir=/app",
+      "-Dsonar.sources=/app/src",
+      "-Dsonar.tests=/app/tests",
+      "-Dsonar.coverage.exclusions=${SONAR_COVERAGE_EXCLUSIONS}",
+      "-Dsonar.login=${SONAR_AUTH_TOKEN}",
+      "-Dsonar.projectName=${APPLICATION_NAME}",
+      "-Dsonar.projectKey=${APPLICATION_NAME}",
+      "-Dsonar.php.tests.reportPath=/app/tests/Output/unit-tests-report.xml",
+      "-Dsonar.php.coverage.reportPaths=/app/tests/Output/unit-tests-coverage.xml",
+      "-Dsonar.php.psalm.reportPaths=/app/tests/Output/psalm-level-3.json",
+      "-Dsonar.php.phpstan.reportPaths=/app/tests/Output/phpstan-level-5.json",
+      "-Dsonar.pullrequest.base=${CHANGE_TARGET}",
+      "-Dsonar.pullrequest.branch=${BRANCH_NAME}",
+      "-Dsonar.pullrequest.key=${CHANGE_ID}",
+      "-Dsonar.scm.revision=${CORRECT_COMMIT_ID}"
+    ]

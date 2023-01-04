@@ -37,7 +37,8 @@
     "squizlabs/php_codesniffer": "^3.7",
     "phpunit/phpunit": "^9",
     "vimeo/psalm": "^4.22",
-    "symfony/phpunit-bridge": "^6.1"
+    "symfony/phpunit-bridge": "^6.1",
+    "qossmic/deptrac-shim": "^1.0"
   },
   "config": {
     "allow-plugins": {
@@ -63,8 +64,14 @@
     "phpmd": [
       "vendor/bin/phpmd ./ ansi phpmd.xml.dist"
     ],
+    "ci-phpmd": [
+      "vendor/bin/phpmd ./ json phpmd.xml.dist --reportfile tests/Output/phpmd.json"
+    ],
     "phpcs": [
       "vendor/bin/phpcs --report=full"
+    ],
+    "ci-phpcs": [
+      "vendor/bin/phpcs --report=json --report-file=tests/Output/phpcs.json"
     ],
     "phpcbf": [
       "vendor/bin/phpcbf"
@@ -72,19 +79,36 @@
     "phpstan": [
       "vendor/bin/phpstan analyse -c phpstan.neon --error-format=table --ansi"
     ],
+    "ci-phpstan": [
+      "vendor/bin/phpstan analyse -c phpstan.neon --error-format=json > tests/Output/phpstan.json"
+    ],
     "psalm": [
       "vendor/bin/psalm --no-diff --output-format=compact"
     ],
+    "ci-psalm": [
+      "vendor/bin/psalm --no-diff --output-format=sonarqube > tests/Output/psalm.json"
+    ],
     "deptrac": [
       "vendor/bin/deptrac analyse --report-uncovered --fail-on-uncovered --formatter=table"
+    ],
+    "ci-deptrac": [
+      "vendor/bin/deptrac analyse --report-uncovered --fail-on-uncovered --formatter=json --output=tests/Output/deptrac.json"
     ],
     "test-unit": [
       "Composer\\Config::disableProcessTimeout",
       "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Unit Tests Suite\""
     ],
+    "ci-test-unit": [
+      "Composer\\Config::disableProcessTimeout",
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Unit Tests Suite\" --coverage-text --log-junit tests/Output/unit-tests-report.xml --coverage-clover tests/Output/unit-tests-coverage.xml"
+    ],
     "test-functional": [
       "Composer\\Config::disableProcessTimeout",
       "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Functional Tests Suite\""
+    ],
+    "ci-test-functional": [
+      "Composer\\Config::disableProcessTimeout",
+      "XDEBUG_MODE=develop,coverage vendor/bin/phpunit -c phpunit.xml.dist --testsuite \"Functional Tests Suite\" --log-junit tests/Output/functional-tests-report.xml"
     ],
     "test-all": [
       "Composer\\Config::disableProcessTimeout",

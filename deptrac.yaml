@@ -1,0 +1,43 @@
+parameters:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#'
+  layers:
+    - name: Command
+      collectors:
+        - type: className
+          regex: .*Command.*
+    - name: Input
+      collectors:
+        - type: className
+          regex: .*DomainModel\\Input.*
+    - name: Output
+      collectors:
+        - type: className
+          regex: .*DomainModel\\Output.*
+    - name: Transformer
+      collectors:
+        - type: className
+          regex: .*DomainModel\\Transformer.*
+    - name: Exception
+      collectors:
+        - type: className
+          regex: .*DomainModel\\Transformer.*
+    - name: Service
+      collectors:
+        - type: className
+          regex: .*DomainModel\\Transformer.*
+  ruleset:
+    Command:
+      - Service
+    Input:
+    Output:
+    Transformer:
+      - Input
+      - Output
+      - Exception
+    Exception:
+    Service:
+      - Transformer
+      - Exception
