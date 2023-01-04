@@ -7,7 +7,7 @@ namespace Powercloud\SRT\DomainModel\Transformer;
 use Powercloud\SRT\DomainModel\Input\PhpmdReport;
 use Powercloud\SRT\DomainModel\Input\ReportInterface;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
-use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue;
+use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\Issue;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\Location\TextRange;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\SeverityEnum;
@@ -36,7 +36,7 @@ class PhpmdTransformer implements TransformerInterface
                     filePath: $file->getFile(),
                     textRange: $textRange
                 );
-                $externalIssues[] = new GenericIssue(
+                $externalIssues[] = new Issue(
                     engineId: 'PHPMD',
                     ruleId: $violation->getRule(),
                     severity: $transformerOptions->getDefaultSeverity() ?: SeverityEnum::Major,

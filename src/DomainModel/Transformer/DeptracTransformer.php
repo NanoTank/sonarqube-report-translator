@@ -32,7 +32,7 @@ class DeptracTransformer implements TransformerInterface
                     filePath: $file->getPath(),
                     textRange: new TextRange(startLine: $message->getLine())
                 );
-                $externalIssues[] = new ExternalIssuesReport\GenericIssue(
+                $externalIssues[] = new ExternalIssuesReport\Issue(
                     engineId: 'DEPTRAC',
                     ruleId: 'forbiddenDependency',
                     severity: $transformerOptions->getDefaultSeverity() ?: $severity,

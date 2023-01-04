@@ -11,7 +11,7 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum
 /**
  * @codeCoverageIgnore
  */
-class GenericIssue
+class Issue
 {
     public function __construct(
         private readonly string $engineId,

@@ -28,14 +28,14 @@ class PhpcsTransformer implements TransformerInterface
                 };
                 $textRange = new Location\TextRange(
                     startLine: $message->getLine(),
-                    startColumn: $message->getColumn()
+                    startColumn: $message->getColumn() - 1,
                 );
                 $location = new Location(
                     message: $message->getMessage(),
                     filePath: $file->getPath(),
                     textRange: $textRange
                 );
-                $externalIssues[] = new ExternalIssuesReport\GenericIssue(
+                $externalIssues[] = new ExternalIssuesReport\Issue(
                     engineId: 'PHPCS',
                     ruleId: $message->getSource(),
                     severity: $transformerOptions->getDefaultSeverity() ?: $severity,

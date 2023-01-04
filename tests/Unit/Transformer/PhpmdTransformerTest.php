@@ -43,7 +43,7 @@ class PhpmdTransformerTest extends KernelTestCase
             }
         }
 
-        foreach ($externalIssueReport->getGenericIssueCollection() as $issueKey => $issue) {
+        foreach ($externalIssueReport->getIssues() as $issueKey => $issue) {
             $this->assertSame('PHPMD', $issue->getEngineId());
             $this->assertSame($violations[$issueKey]->getRule(), $issue->getRuleId());
             $this->assertEquals(SeverityEnum::Major, $issue->getSeverity());

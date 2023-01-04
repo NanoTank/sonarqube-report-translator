@@ -25,7 +25,6 @@ services:
     volumes:
       - ../:/app
     command: [
-      "-X",
       "-Dsonar.host.url=${SONAR_HOST_URL}",
       "-Dsonar.projectBaseDir=/app",
       "-Dsonar.sources=/app/src",
@@ -37,7 +36,7 @@ services:
       "-Dsonar.php.coverage.reportPaths=/app/tests/Output/unit-tests-coverage.xml",
       "-Dsonar.php.psalm.reportPaths=/app/tests/Output/psalm.json",
       "-Dsonar.php.phpstan.reportPaths=/app/tests/Output/phpstan.json",
-      "-Dsonar.externalIssuesReportPaths=/app/tests/Output/phpmd-sonar.json",
+      "-Dsonar.externalIssuesReportPaths=/app/tests/Output/deptrac-sonar.json,/app/tests/Output/phpcs-sonar.json,/app/tests/Output/phpmd-sonar.json",
     ]
     extra_hosts:
       - "host.docker.internal:host-gateway"

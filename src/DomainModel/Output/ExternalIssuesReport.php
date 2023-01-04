@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\DomainModel\Output;
 
-use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue;
+use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\Issue;
 
 /**
  * @codeCoverageIgnore
@@ -12,16 +12,16 @@ use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue;
 class ExternalIssuesReport
 {
     public function __construct(
-        /** @var GenericIssue[] $genericIssueCollection */
-        private readonly array $genericIssueCollection
+        /** @var Issue[] $issues */
+        private readonly array $issues
     ) {
     }
 
     /**
-     * @return GenericIssue[]
+     * @return Issue[]
      */
-    public function getGenericIssueCollection(): array
+    public function getIssues(): array
     {
-        return $this->genericIssueCollection;
+        return $this->issues;
     }
 }
