@@ -2,8 +2,10 @@
 
 namespace Powercloud\SRT\DomainModel\Input\PhpcsReport;
 
-use LogicException;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Exception\LogicException;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
@@ -11,20 +13,34 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
 {
     private DenormalizerInterface $denormalizer;
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws ExceptionInterface
+     */
     public function denormalize(
         mixed $data,
-        string $type = PhpcsReport\Totals::class,
+        string $type,
         string $format = null,
         array $context = []
     ): PhpcsReport {
         if (!isset($data['totals'])) {
-            throw new LogicException('Missing [totals] in the phpcs report data');
+            throw new UnexpectedValueException('Missing [totals] in the phpcs report data');
+        }
+
+        if (PhpcsReport::class !== $type) {
+            throw new LogicException(
+                sprintf(
+                    'Expected type of %s, %s given',
+                    PhpcsReport::class,
+                    $type
+                )
+            );
         }
 
         /** @var PhpcsReport\Totals $report */
         $totals = $this->denormalizer->denormalize(
             data: $data['totals'],
-            type: $type,
+            type: PhpcsReport\Totals::class,
             format: $format,
             context: $context,
         );
