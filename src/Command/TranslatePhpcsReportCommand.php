@@ -21,7 +21,7 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
         parent::__construct($serializer);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -30,7 +30,7 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $phpcsFileContent = $this->getFileContent($input->getArgument('path'));
+        $phpcsFileContent = $this->getFileContent((string) $input->getArgument('path'));
 
         $phpcsReport = $this->serializer->deserialize($phpcsFileContent, PhpcsReport::class, 'json');
 
@@ -40,7 +40,7 @@ class TranslatePhpcsReportCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'),
             $externalIssuesReport,
         );
 
