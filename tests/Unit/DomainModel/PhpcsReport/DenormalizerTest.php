@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport\Denormalizer;
 use stdClass;
+use Symfony\Component\Serializer\Exception\LogicException;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class DenormalizerTest extends TestCase
@@ -25,9 +27,24 @@ class DenormalizerTest extends TestCase
         $this->assertFalse($this->testObject->supportsDenormalization([], stdClass::class));
     }
 
+    public function testWrongReportTypeThrowsException(): void
+    {
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage(
+            'Expected type of [Powercloud\SRT\DomainModel\Input\PhpcsReport], [InvalidTypeName] given'
+        );
+
+        $this->testObject->denormalize(
+            [],
+            'InvalidTypeName',
+            null,
+            []
+        );
+    }
+
     public function testDenormalizeWithMissingTotalsInReportThrowsException(): void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(UnexpectedValueException::class);
         $this->expectExceptionMessage('Missing [totals] in the phpcs report data');
 
         $this->testObject->denormalize([], PhpcsReport::class);

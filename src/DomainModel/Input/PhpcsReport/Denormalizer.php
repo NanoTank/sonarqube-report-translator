@@ -23,18 +23,18 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
         string $format = null,
         array $context = []
     ): PhpcsReport {
-        if (!isset($data['totals'])) {
-            throw new UnexpectedValueException('Missing [totals] in the phpcs report data');
-        }
-
         if (PhpcsReport::class !== $type) {
             throw new LogicException(
                 sprintf(
-                    'Expected type of %s, %s given',
+                    'Expected type of [%s], [%s] given',
                     PhpcsReport::class,
                     $type
                 )
             );
+        }
+
+        if (!isset($data['totals'])) {
+            throw new UnexpectedValueException('Missing [totals] in the phpcs report data');
         }
 
         /** @var PhpcsReport\Totals $report */
