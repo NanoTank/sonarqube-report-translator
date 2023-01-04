@@ -7,8 +7,8 @@ This project is meant to bridge the output formats of
 and **[PHP Mess Detector](https://phpmd.org/)** reports to
 **[Sonarqube's](https://www.sonarsource.com/products/sonarqube/)**
 [generic issue input format](https://docs.sonarqube.org/latest/analyzing-source-code/importing-external-issues/generic-issue-import-format/).
-It is based on **[Symfony](https://symfony.com/)** 6 
-and uses **[PHPUnit](https://phpunit.de/)** for automated testing and
+It is based on **[Symfony](https://symfony.com/)** 6,
+uses **[PHPUnit](https://phpunit.de/)** for automated testing and
 **[Composer](https://getcomposer.org/)**.
 
 ## Precondition
@@ -46,7 +46,7 @@ in case you need to. You can also run
 ```shell
 bin/console srt:translate path/to/input/file.json path/to/output/file.json [--type] [--severity] 
 ```
-to let the translator check for the given input format.
+to let the translator choose the right translator for you by given input format.
 
 ## Tests
 This project is using PHPUnit to run automated tests in your Docker container. 
