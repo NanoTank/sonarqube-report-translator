@@ -18,10 +18,10 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
     ): DeptracReport {
         /** @var DeptracReport\Report $report */
         $report = $this->denormalizer->denormalize(
-            $data['Report'] ?? [],
-            $type,
-            $format,
-            $context,
+            data: $data['Report'] ?? [],
+            type: $type,
+            format: $format,
+            context: $context,
         );
         /** @var DeptracReport\File[] $files */
         $files = [];
@@ -32,10 +32,10 @@ class Denormalizer implements DenormalizerInterface, DenormalizerAwareInterface
             foreach ($fileIssues['messages'] ?? [] as $messageData) {
                 /** @var DeptracReport\File\Message $message */
                 $message = $this->denormalizer->denormalize(
-                    $messageData,
-                    DeptracReport\File\Message::class,
-                    $format,
-                    $context,
+                    data: $messageData,
+                    type: DeptracReport\File\Message::class,
+                    format: $format,
+                    context: $context,
                 );
 
                 $messages[] = $message;
