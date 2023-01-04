@@ -4,40 +4,54 @@ parameters:
   exclude_files:
     - '#.*test.*#'
   layers:
+    - name: Framework
+      collectors:
+        - type: className
+          regex: ^(?!Powercloud\\SRT).*
     - name: Command
       collectors:
-        - type: className
-          regex: .*Command.*
+        - type: directory
+          regex: src/Command
     - name: Input
       collectors:
-        - type: className
-          regex: .*DomainModel\\Input.*
+        - type: directory
+          regex: src/DomainModel/Input
     - name: Output
       collectors:
-        - type: className
-          regex: .*DomainModel\\Output.*
+        - type: directory
+          regex: src/DomainModel/Output
     - name: Transformer
       collectors:
-        - type: className
-          regex: .*DomainModel\\Transformer.*
+        - type: directory
+          regex: src/DomainModel/Transformer
     - name: Exception
       collectors:
-        - type: className
-          regex: .*DomainModel\\Transformer.*
+        - type: directory
+          regex: src/Exception
     - name: Service
       collectors:
-        - type: className
-          regex: .*DomainModel\\Transformer.*
+        - type: directory
+          regex: src/Service
   ruleset:
     Command:
       - Service
+      - Output
+      - Input
+      - Framework
+      - Transformer
+      - Exception
     Input:
+      - Framework
     Output:
     Transformer:
       - Input
       - Output
       - Exception
     Exception:
+      - Framework
     Service:
       - Transformer
       - Exception
+      - Input
+      - Output
+      - Framework
