@@ -22,7 +22,8 @@ abstract class AbstractTranslatorCommand extends Command
         parent::__construct();
     }
 
-    protected function configure()
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
+    protected function configure(): void
     {
         parent::configure();
         $issueTypes = [];
@@ -99,6 +100,7 @@ abstract class AbstractTranslatorCommand extends Command
         );
     }
 
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
     protected function getSeverity(InputInterface $input): ?ExternalIssuesReport\GenericIssue\SeverityEnum
     {
         try {
@@ -108,6 +110,7 @@ abstract class AbstractTranslatorCommand extends Command
         }
     }
 
+    /** @SuppressWarnings(PHPMD.StaticAccess) */
     protected function getIssueType(InputInterface $input): ?ExternalIssuesReport\GenericIssue\TypeEnum
     {
         try {
