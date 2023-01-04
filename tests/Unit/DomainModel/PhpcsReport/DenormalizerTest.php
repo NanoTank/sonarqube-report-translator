@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport;
 use Powercloud\SRT\DomainModel\Input\PhpcsReport\Denormalizer;
 use stdClass;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
 use Symfony\Component\Serializer\Exception\LogicException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -48,6 +49,14 @@ class DenormalizerTest extends TestCase
         $this->expectExceptionMessage('Missing [totals] in the phpcs report data');
 
         $this->testObject->denormalize([], PhpcsReport::class);
+    }
+
+    public function testDenormalizerThrowsExceptionWhenDataNotArray(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Unsupported format for argument \$data. Expected [array], received [string]");
+
+        $this->testObject->denormalize('string data', PhpcsReport::class);
     }
 
     /**
