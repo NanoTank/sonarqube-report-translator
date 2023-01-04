@@ -71,7 +71,7 @@ class PhpcsTransformerTest extends KernelTestCase
                 $issue->getPrimaryLocation()->getTextRange()->getStartLine()
             );
             $this->assertEquals(
-                $messages[$issueKey]->getColumn(),
+                $messages[$issueKey]->getColumn() - 1,
                 $issue->getPrimaryLocation()->getTextRange()->getStartColumn()
             );
         }
