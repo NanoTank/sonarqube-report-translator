@@ -41,7 +41,7 @@ bin/console srt:translate:phpcs path/to/input/file.json path/to/output/file.json
 ```shell
 bin/console srt:translate:phpmd path/to/input/file.json path/to/output/file.json [--type] [--severity] 
 ```
-With the optional switches *type* and *severity* you can override the output values of your report
+With the optional switches *issueType* and *severity* you can override the output values of your report
 in case you need to. You can also run
 ```shell
 bin/console srt:translate path/to/input/file.json path/to/output/file.json [--type] [--severity] 
@@ -63,5 +63,16 @@ Or just run both tests suites at once and get an HTML code coverage report creat
 ```shell
 composer test-all
 ```
+
+## Extending with more formats
+While the currently supported formats for transation into sonarqube format are: phpcs, phpmd and deptrac, more can be 
+added by changing the following:
+1. Create a new report class that can be deserialized from your new format in `src/DomainModel/Input` that
+    extends the `Powercloud\SRT\DomainModel\Input\ReportInterface`
+2. Create a new transformer for your input report that implements the 
+    `Powercloud\SRT\DomainModel\Transformer\TransformerInterface`
+3. Register your new format in the `Powercloud\SRT\Service\ReportDeserializerService::deserialize` to be included in the
+    supported formats
+4. Check that everything works when using the `bin/console srt:translate` with your new format
 
 

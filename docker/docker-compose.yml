@@ -10,7 +10,7 @@ services:
       XDEBUG_MODE: debug,coverage
       PHP_IDE_CONFIG: serverName=srt
     command:
-      - 'srt-test'
+      - 'srt:translate'
     volumes:
       - ../:/app:rw
     extra_hosts:
