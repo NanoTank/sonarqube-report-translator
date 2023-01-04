@@ -47,7 +47,6 @@ class DeptracTransformerTest extends TestCase
             )
         );
         $this->testObject->transform(report: $report);
-
     }
 
     public function testTransformCreatesValidReport(): void

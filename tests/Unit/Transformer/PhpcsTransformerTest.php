@@ -46,7 +46,6 @@ class PhpcsTransformerTest extends KernelTestCase
             )
         );
         $this->testObject->transform(report: $report);
-
     }
 
     public function testTransformCreatesValidReport(): void
