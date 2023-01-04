@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Powercloud\SRT\Tests\Functional\Command;
 
-use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport;
 use Powercloud\SRT\DomainModel\Output\ExternalIssuesReport\GenericIssue\TypeEnum;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
