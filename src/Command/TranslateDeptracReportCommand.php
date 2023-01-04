@@ -21,7 +21,7 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
         parent::__construct($serializer);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         parent::configure();
 
@@ -30,7 +30,7 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $deptracFileContent = $this->getFileContent($input->getArgument('path'));
+        $deptracFileContent = $this->getFileContent((string) $input->getArgument('path'));
 
         $deptracReport = $this->serializer->deserialize($deptracFileContent, DeptracReport::class, 'json');
 
@@ -40,7 +40,7 @@ class TranslateDeptracReportCommand extends AbstractTranslatorCommand
         );
 
         $this->writeExternalIssueReportToFile(
-            $input->getArgument('externalIssuesReportPath'),
+            (string) $input->getArgument('externalIssuesReportPath'),
             $externalIssuesReport,
         );
 
