@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Powercloud\SRT\Command;
 
 use Powercloud\SRT\DomainModel\Transformer\TransformerOptions;
+use Powercloud\SRT\Exception\UnsupportedReportException;
 use Powercloud\SRT\Service\ReportDeserializerInterface;
 use Powercloud\SRT\Service\ReportToSonarqubeConverterInterface;
 use Symfony\Component\Console\Input\InputArgument;
@@ -29,6 +30,10 @@ class ReportTranslatorCommand extends AbstractTranslatorCommand
         $this->setName(name: 'srt:translate');
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws UnsupportedReportException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $reportContent = $this->getFileContent((string) $input->getArgument('path'));
