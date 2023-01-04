@@ -69,10 +69,6 @@ abstract class AbstractTranslatorCommand extends Command
     }
 
     /**
-     * @param string $path
-     *
-     * @return string
-     *
      * @throws FileNotFoundException when the file cannot be read or it is empty
      */
     protected function getFileContent(string $path): string
