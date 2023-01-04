@@ -7,6 +7,7 @@ namespace Powercloud\SRT\Command;
 use Powercloud\SRT\DomainModel\Input\PhpmdReport;
 use Powercloud\SRT\DomainModel\Transformer\PhpmdTransformer;
 use Powercloud\SRT\DomainModel\Transformer\TransformerOptions;
+use Powercloud\SRT\Exception\UnsupportedReportForTransformer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,6 +29,10 @@ class TranslatePhpmdReportCommand extends AbstractTranslatorCommand
         $this->setName(name: 'srt:translate:phpmd');
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws UnsupportedReportForTransformer
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $phpmdFileContent = $this->getFileContent((string) $input->getArgument('path'));
