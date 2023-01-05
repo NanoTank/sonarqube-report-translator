@@ -5,6 +5,8 @@ RUN apk add --no-cache \
         libxslt \
         $PHPIZE_DEPS
 
+RUN apk add --update linux-headers
+
 RUN pecl install xdebug
 
 RUN docker-php-ext-enable xdebug
